@@ -25,12 +25,22 @@ namespace QuickRun
             InitializeComponent();
         }
 
-        private void window_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
             }
+        }
+
+        private void Buttonclose(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Buttonminimise(object sender, RoutedEventArgs e)
+        {
+            MainPage.WindowState = WindowState.Minimized;
         }
     }
 }

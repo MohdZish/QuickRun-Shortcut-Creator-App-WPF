@@ -8,12 +8,18 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Left="300" Top="100"
-        Title="MainWindow" Height="300" Width="600" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize">
+        Title="MainWindow" Height="300" Width="600" AllowsTransparency="True" WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize">
     <Window.Background>
-        <SolidColorBrush x:Name="BackgroundBrush" Opacity="0.95" Color="#3bb4f5"/>
+        <SolidColorBrush x:Name="BackgroundBrush" Opacity="0.95" Color="#FF14121A"/>
     </Window.Background>
+
+    <StackPanel>
+        <Grid>
+            <TextBlock Text="QuickRun" Margin="10 10 0 0" Foreground="White" FontFamily="Candara Light" FontSize="20" ></TextBlock>
+            <Button x:Name="buttonclose" Content="×" Margin="0,0,0,0" Click="Buttonclose" Width="50" FontSize="30" FontFamily="Calibri Light" Background="#0014121A" HorizontalAlignment="Right" BorderBrush="#FFA3A3A3" BorderThickness="0" Foreground="White" Opacity="0.95" Height="41" VerticalAlignment="Top"/>
+            <Button x:Name="buttonminimise" Content="-" Margin="0,0,50,0" Click="Buttonminimise" Width="50" FontSize="30" FontFamily="Calibri Light" Background="#0014121A" HorizontalAlignment="Right" BorderThickness="0" Foreground="White" Opacity="0.95" Height="41" VerticalAlignment="Top"/>
+        </Grid>
+
+    </StackPanel>
     
-    <Grid>
-        
-    </Grid>
 </Window>
