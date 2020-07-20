@@ -42,5 +42,6 @@ namespace QuickRun
         {
             MainPage.WindowState = WindowState.Minimized;
         }
+
     }
 }
