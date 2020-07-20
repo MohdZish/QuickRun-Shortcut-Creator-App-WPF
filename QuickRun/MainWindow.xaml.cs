@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,6 +42,15 @@ namespace QuickRun
         private void Buttonminimise(object sender, RoutedEventArgs e)
         {
             MainPage.WindowState = WindowState.Minimized;
+        }
+
+        private void Test(object sender, RoutedEventArgs e)
+        {
+            string[] readText = File.ReadAllLines(@"C:\test\test.txt");
+            foreach (string s in readText)
+            {
+                Console.WriteLine(s);
+            }
         }
 
     }
