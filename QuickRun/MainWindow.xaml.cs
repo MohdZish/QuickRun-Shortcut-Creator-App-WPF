@@ -24,7 +24,7 @@ namespace QuickRun
         public MainWindow()
         {
             InitializeComponent();
-            Test();
+            LoadingScreen();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -45,48 +45,65 @@ namespace QuickRun
             MainPage.WindowState = WindowState.Minimized;
         }
 
-        private void Test()
+        private void LoadingScreen()
         {
             string[] readText = File.ReadAllLines(@"C:\test\test.txt");
-            foreach (string mon in readText)
+            foreach (string text in readText)
             {
+                string myString = text;
+                string[] mon = myString.Split('-');   //We're making array for mon[0] is name and mon[1] is shortcut
+
                 Button namebutton = new Button();
                 StackPanel insidebutton = new StackPanel();
+                insidebutton.Orientation = Orientation.Horizontal;
                 insidebutton.HorizontalAlignment = HorizontalAlignment.Left;
                 insidebutton.VerticalAlignment = VerticalAlignment.Top;
-                insidebutton.Height = 80;
 
                 Label itemname = new Label();
+                Label itemname2 = new Label();
                 TextBlock itemnameblock = new TextBlock();
+                TextBlock itemnameblock2 = new TextBlock();
+                itemnameblock.Width = 100;
+                itemnameblock2.Width = 140;
                 itemname.Content = itemnameblock;
-                itemnameblock.Text = mon;
-                itemnameblock.Tag = mon;
-                itemnameblock.TextWrapping = TextWrapping.Wrap;
-                itemname.Foreground = Brushes.White;
-                itemname.HorizontalAlignment = HorizontalAlignment.Center;
-                itemname.VerticalContentAlignment = VerticalAlignment.Center;
-                itemname.HorizontalContentAlignment = HorizontalAlignment.Center;
-                itemname.Height = 70;
-                itemname.Width = 80;
+                itemname2.Content = itemnameblock2;
+                itemnameblock2.TextAlignment = TextAlignment.Right;
+                itemnameblock.Text = mon[0]; //text of name
+                itemnameblock2.Text = mon[1];
+                itemnameblock.Tag = mon[0];
+                itemname.HorizontalAlignment = HorizontalAlignment.Left;
+                itemname.HorizontalContentAlignment = HorizontalAlignment.Left;
+                itemname2.HorizontalAlignment = HorizontalAlignment.Right;
+                itemname2.HorizontalContentAlignment = HorizontalAlignment.Right;
+
                 Ellipse typecolor = new Ellipse();
+                //typecolor.Fill = new SolidColorBrush(Color.FromArgb(255, 12, 255, 210));
                 typecolor.Height = 5;
                 typecolor.Width = 5;
 
                 namebutton.Content = insidebutton;
-                namebutton.BorderThickness = new Thickness(1);
+                namebutton.BorderThickness = new Thickness(0.5);
                 namebutton.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-                namebutton.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+                namebutton.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 76, 50, 168));
                 namebutton.Margin = new Thickness(5);
-                namebutton.Width = 80;
-                namebutton.Height = 80;
-                namebutton.Tag = mon;
-                namebutton.Width = 80;
-                namebutton.Height = 80;
+                namebutton.Width = 280;
+                namebutton.Height = 40;
+                namebutton.Tag = mon[0];
                 itemname.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+                itemname2.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
                 insidebutton.Children.Add(typecolor);
                 insidebutton.Children.Add(itemname);
+                insidebutton.Children.Add(itemname2);
                 MyPanel.Children.Add(namebutton);
             }
+        }
+
+        private void AddNew(object sender, RoutedEventArgs e)
+        {
+            MyPanel.Children.Clear();
+            AddNewPage newpagedashboard = new AddNewPage();
+            AddNewPanel.Content = newpagedashboard;
+
         }
 
     }
