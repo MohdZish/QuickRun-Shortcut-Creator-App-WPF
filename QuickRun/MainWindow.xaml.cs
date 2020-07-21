@@ -24,6 +24,7 @@ namespace QuickRun
         public MainWindow()
         {
             InitializeComponent();
+            Test();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -44,7 +45,7 @@ namespace QuickRun
             MainPage.WindowState = WindowState.Minimized;
         }
 
-        private void Test(object sender, RoutedEventArgs e)
+        private void Test()
         {
             string[] readText = File.ReadAllLines(@"C:\test\test.txt");
             foreach (string mon in readText)
@@ -74,17 +75,17 @@ namespace QuickRun
                 namebutton.Content = insidebutton;
                 namebutton.BorderThickness = new Thickness(1);
                 namebutton.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-                namebutton.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 255));
+                namebutton.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
                 namebutton.Margin = new Thickness(5);
                 namebutton.Width = 80;
                 namebutton.Height = 80;
                 namebutton.Tag = mon;
                 namebutton.Width = 80;
                 namebutton.Height = 80;
+                itemname.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
                 insidebutton.Children.Add(typecolor);
                 insidebutton.Children.Add(itemname);
                 MyPanel.Children.Add(namebutton);
-
             }
         }
 
