@@ -24,7 +24,7 @@ namespace QuickRun
         public MainWindow()
         {
             InitializeComponent();
-            Test();
+            LoadingScreen();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -45,7 +45,7 @@ namespace QuickRun
             MainPage.WindowState = WindowState.Minimized;
         }
 
-        private void Test()
+        private void LoadingScreen()
         {
             string[] readText = File.ReadAllLines(@"C:\test\test.txt");
             foreach (string text in readText)
@@ -55,24 +55,26 @@ namespace QuickRun
 
                 Button namebutton = new Button();
                 StackPanel insidebutton = new StackPanel();
+                insidebutton.Orientation = Orientation.Horizontal;
                 insidebutton.HorizontalAlignment = HorizontalAlignment.Left;
                 insidebutton.VerticalAlignment = VerticalAlignment.Top;
-                insidebutton.Height = 80;
 
                 Label itemname = new Label();
                 Label itemname2 = new Label();
                 TextBlock itemnameblock = new TextBlock();
                 TextBlock itemnameblock2 = new TextBlock();
+                itemnameblock.Width = 100;
+                itemnameblock2.Width = 140;
                 itemname.Content = itemnameblock;
                 itemname2.Content = itemnameblock2;
+                itemnameblock2.TextAlignment = TextAlignment.Right;
                 itemnameblock.Text = mon[0]; //text of name
                 itemnameblock2.Text = mon[1];
                 itemnameblock.Tag = mon[0];
-                itemnameblock.TextWrapping = TextWrapping.Wrap;
-                /*Maybe useless   itemname.Foreground = Brushes.White;
-                itemname.HorizontalAlignment = HorizontalAlignment.Center;
-                itemname.VerticalContentAlignment = VerticalAlignment.Center;
-                itemname.HorizontalContentAlignment = HorizontalAlignment.Center;*/
+                itemname.HorizontalAlignment = HorizontalAlignment.Left;
+                itemname.HorizontalContentAlignment = HorizontalAlignment.Left;
+                itemname2.HorizontalAlignment = HorizontalAlignment.Right;
+                itemname2.HorizontalContentAlignment = HorizontalAlignment.Right;
 
                 Ellipse typecolor = new Ellipse();
                 //typecolor.Fill = new SolidColorBrush(Color.FromArgb(255, 12, 255, 210));
@@ -94,6 +96,14 @@ namespace QuickRun
                 insidebutton.Children.Add(itemname2);
                 MyPanel.Children.Add(namebutton);
             }
+        }
+
+        private void AddNew(object sender, RoutedEventArgs e)
+        {
+            MyPanel.Children.Clear();
+            AddNewPage newpagedashboard = new AddNewPage();
+            AddNewPanel.Content = newpagedashboard;
+
         }
 
     }
