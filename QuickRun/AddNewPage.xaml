@@ -16,5 +16,15 @@
         <TextBox x:Name="nameinput" FontSize="15" CaretBrush="Black" BorderThickness="1"  Text="" Margin="79,52,21,203" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="25" Width="200"  Background="#faf9f7" BorderBrush="#e3e3e3" Foreground="Black"/>
         <Label Content="Link :" FontFamily="Corbel Light" Margin="10,91,74,89"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="216"/>
         <TextBox x:Name="usernameinput" FontSize="15" CaretBrush="Black" BorderThickness="1"  Text="" Margin="79,91,21,164" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="25" Width="200"  Background="#faf9f7" BorderBrush="#e3e3e3" Foreground="Black"/>
+        <ComboBox Name="type" Margin="79,136,21,119" Width="200" Height="25" HorizontalContentAlignment="Center" Opacity="0.9">
+            <ComboBoxItem Content="Website"></ComboBoxItem>
+            <ComboBoxItem Content="Email"></ComboBoxItem>
+            <ComboBoxItem Content="Mobile"></ComboBoxItem>
+            <ComboBoxItem Content="Official"></ComboBoxItem>
+            <ComboBoxItem Content="Bank"></ComboBoxItem>
+            <ComboBoxItem Content="Other"></ComboBoxItem>
+        </ComboBox>
+        <Label Content="Type :" FontFamily="Corbel Light" Margin="10,136,221,44"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="69"/>
+
     </Grid>
 </Page>

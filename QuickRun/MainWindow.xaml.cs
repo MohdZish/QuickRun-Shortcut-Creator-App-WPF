@@ -95,7 +95,6 @@ namespace QuickRun
                 insidebutton.Children.Add(itemname);
                 insidebutton.Children.Add(itemname2);
                 MyPanel.Children.Add(namebutton);
-                MyPanel.Children.Add(namebutton);
             }
         }
 
