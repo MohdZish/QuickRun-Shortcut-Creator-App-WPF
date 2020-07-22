@@ -86,8 +86,8 @@ namespace QuickRun
 
                 namebutton.Content = insidebutton;
                 namebutton.BorderThickness = new Thickness(0.5);
-                namebutton.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-                namebutton.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 76, 50, 168));
+                namebutton.Background = new SolidColorBrush(Color.FromArgb(125, 250, 249, 247));
+                namebutton.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 186, 186, 186));
                 namebutton.Margin = new Thickness(5);
                 namebutton.Width = 280;
                 namebutton.Height = 40;
@@ -103,7 +103,7 @@ namespace QuickRun
 
         private void AddNew(object sender, RoutedEventArgs e)
         {
-            MyPanel.Children.Clear();
+            
             AddNewPage newpagedashboard = new AddNewPage();
             AddNewPanel.Content = newpagedashboard;
         }

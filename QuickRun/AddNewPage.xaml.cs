@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,6 +28,7 @@ namespace QuickRun
             softwarebox.Visibility = Visibility.Hidden;
             linktext.Visibility = Visibility.Hidden;
             linkbox.Visibility = Visibility.Hidden;
+            
         }
 
         private bool handle = true;
@@ -72,5 +74,39 @@ namespace QuickRun
 
         }
 
+        private void Backbtn(object sender, RoutedEventArgs e)
+        {
+            //AddNewPage.Visi = Visibility.Hidden;
+            this.Visibility = Visibility.Hidden;
+        }
+
+        private void Erase(object sender, RoutedEventArgs e)
+        {
+            test.Text = "";
+        }
+
+        private void ListenToKeys(object sender, RoutedEventArgs e)
+        {
+            //AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)ListenToKeys
+            var window = Window.GetWindow(this);
+            window.KeyDown += Keys;
+        }
+
+        private void Keys(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftShift))
+                test.Text += "LShift";
+
+            if (Keyboard.IsKeyDown(Key.RightShift))
+                test.Text += "RShift";
+
+            if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                test.Text += "LControl";
+
+            if (Keyboard.IsKeyDown(Key.RightCtrl))
+                test.Text += "RControl";
+
+
+        }
     }
 }

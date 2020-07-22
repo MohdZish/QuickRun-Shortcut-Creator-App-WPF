@@ -11,6 +11,11 @@
         <SolidColorBrush Opacity="1"  Color="White"/>
     </Page.Background>
     <Grid>
+        <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="appbar_arrow_left" Width="76" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0" Margin="-2,-13,226,217">
+            <Button Click="Backbtn" Opacity="1" BorderBrush="White" Background="White" Canvas.Left="25" Canvas.Top="25">
+                <Path Width="12.297" Height="13.833" Canvas.Left="27.556" Canvas.Top="26.75" Stretch="Fill" Fill="#4c32a8" Data="F1 M 35.8724,37.6042L 39.0391,40.7708L 50.5182,51.8542L 40.2266,51.8542L 25.1849,37.6041L 40.2266,23.3542L 50.5182,23.3542L 39.0391,34.4375L 35.8724,37.6042 Z "/>
+            </Button>
+        </Canvas>
         <TextBlock x:Name="titlename" Margin="79,10,0,250" HorizontalAlignment="Left" Foreground="Black" FontSize="14" Width="147"><Run Text="Add you"/><Run Text="r"/><Run Text=" new "/><Run Text="Shortcut!"/></TextBlock>
         <Label Content="Name : " FontFamily="Corbel Light" Margin="10,52,74,128"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="216"/>
         <TextBox x:Name="nameinput" FontSize="15" CaretBrush="Black" BorderThickness="1"  Text="" Margin="79,52,21,203" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="25" Width="200"  Background="#faf9f7" BorderBrush="#e3e3e3" Foreground="Black"/>
@@ -22,12 +27,12 @@
             <ComboBoxItem Content="Software"></ComboBoxItem>
             <ComboBoxItem Content="Other"></ComboBoxItem>
         </ComboBox>
-      
+
         <Label x:Name="linktext" Content="Link :" Visibility="Collapsed" FontFamily="Corbel Light" Margin="10,132,74,48"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="216"/>
         <TextBox x:Name="linkbox" FontSize="15" CaretBrush="Black" BorderThickness="1"  Text="" Margin="79,132,21,123" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="25" Width="200"  Background="#faf9f7" BorderBrush="#e3e3e3" Foreground="Black"/>
 
-        <Label Name="softwaretext" Content="App :" FontFamily="Corbel Light" Margin="10,132,221,48"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="69"/>
-        <ComboBox x:Name="softwarebox" IsTextSearchEnabled="True" IsEditable="True" ItemsSource="{Binding ItemList}" Text="{Binding SearchTextText}"  Margin="79,132,21,123" Width="200" Height="25" HorizontalContentAlignment="Center" Opacity="0.9">
+        <Label Name="softwaretext" Content="App :" FontFamily="Corbel Light" Margin="11,129,220,51"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="69"/>
+        <ComboBox x:Name="softwarebox" IsTextSearchEnabled="True" IsEditable="True" ItemsSource="{Binding ItemList}" Text="{Binding SearchTextText}"  Margin="79,129,21,126" Width="200" Height="25" HorizontalContentAlignment="Center" Opacity="0.9">
             <ComboBoxItem Content="Website"></ComboBoxItem>
             <ComboBoxItem Content="Email"></ComboBoxItem>
             <ComboBoxItem Content="Folder"></ComboBoxItem>
@@ -35,6 +40,19 @@
             <ComboBoxItem Content="Other"></ComboBoxItem>
         </ComboBox>
 
+        <TextBox x:Name="test" FontSize="15" CaretBrush="Black" BorderThickness="1"  Text="" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Width="147"  Background="#faf9f7" BorderBrush="#e3e3e3" Foreground="Black" Canvas.Left="-203" Canvas.Top="5" Margin="46,172,107,34"/>
+
+        <Button Click="ListenToKeys" VerticalAlignment="Top" Margin="216,172,22,0" BorderThickness="0.5"  Height="30" Background="White" Foreground="Black" BorderBrush="#4c32a8">
+            <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="appbar_add" Width="219" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                <TextBlock Text="Listen" Canvas.Left="14" Canvas.Top="5"/>
+            </Canvas>
+        </Button>
+
+        <Button Click="Erase" VerticalAlignment="Top" Margin="216,216,22,0" BorderThickness="0.5"  Height="30" Background="White" Foreground="Black" BorderBrush="#4c32a8">
+            <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="new" Width="219" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                <TextBlock Text="Erase" Canvas.Left="16" Canvas.Top="5"/>
+            </Canvas>
+        </Button>
 
     </Grid>
 </Page>
