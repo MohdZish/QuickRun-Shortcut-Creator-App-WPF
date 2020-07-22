@@ -26,6 +26,7 @@ namespace QuickRun
         {
             InitializeComponent();
             LoadingScreen();
+
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -34,6 +35,7 @@ namespace QuickRun
             {
                 DragMove();
             }
+            Keyboard.ClearFocus();
         }
 
         private void Buttonclose(object sender, RoutedEventArgs e)
