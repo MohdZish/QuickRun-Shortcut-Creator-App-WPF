@@ -19,9 +19,8 @@
         <ComboBox Name="type" Margin="79,136,21,119" Width="200" Height="25" HorizontalContentAlignment="Center" Opacity="0.9">
             <ComboBoxItem Content="Website"></ComboBoxItem>
             <ComboBoxItem Content="Email"></ComboBoxItem>
-            <ComboBoxItem Content="Mobile"></ComboBoxItem>
-            <ComboBoxItem Content="Official"></ComboBoxItem>
-            <ComboBoxItem Content="Bank"></ComboBoxItem>
+            <ComboBoxItem Content="Folder"></ComboBoxItem>
+            <ComboBoxItem Content="Software"></ComboBoxItem>
             <ComboBoxItem Content="Other"></ComboBoxItem>
         </ComboBox>
         <Label Content="Type :" FontFamily="Corbel Light" Margin="10,136,221,44"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="69"/>
