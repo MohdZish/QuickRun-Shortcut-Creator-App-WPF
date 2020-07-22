@@ -96,7 +96,6 @@ namespace QuickRun
                 window.KeyDown += new KeyEventHandler(Keys);
             }
             keydebugging = true;
-            //New textssssssss
             return;
         }
 
@@ -105,10 +104,17 @@ namespace QuickRun
             KeyConverter kc = new KeyConverter();
             var displaykey = kc.ConvertToString(e.Key);
 
-            string[] defaultkeys = { "a" };
+            string[] defaultkeys = {"LeftShift","RightShift"};
+            string[] correctkeys = {"LShift", "RShift"};
 
-            if ((displaykey == "LeftShift") && (test.Text.Contains("LShift") == false)) 
-            { test.Text += "LShift"; }
+            int b = 0;
+            foreach(string a in defaultkeys)
+            {
+                if ((displaykey == a) && (test.Text.Contains(correctkeys[b]) == false))
+                { test.Text += correctkeys[b]; }
+                b++;
+            }
+            
 
             
 
