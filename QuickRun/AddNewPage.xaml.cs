@@ -96,6 +96,7 @@ namespace QuickRun
                 window.KeyUp += Keys;
             }
             keydebugging=true;
+            //New text
             return;
         }
 
