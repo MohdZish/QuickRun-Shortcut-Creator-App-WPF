@@ -105,7 +105,7 @@ namespace QuickRun
             var displaykey = kc.ConvertToString(e.Key);
 
             string[] defaultkeys = {"LeftShift","RightShift"};
-            string[] correctkeys = {"LShift", "RShift"} //test
+            string[] correctkeys = { "LShift", "RShift" }; //testing
 
             int b = 0;
             foreach(string a in defaultkeys)
