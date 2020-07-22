@@ -28,7 +28,7 @@ namespace QuickRun
             softwarebox.Visibility = Visibility.Hidden;
             linktext.Visibility = Visibility.Hidden;
             linkbox.Visibility = Visibility.Hidden;
-            
+
         }
 
         private bool handle = true;
@@ -93,32 +93,25 @@ namespace QuickRun
             var window = Window.GetWindow(this);
             if (keydebugging == false)
             {
-                window.KeyUp += Keys;
+                window.KeyDown += new KeyEventHandler(Keys);
             }
-            keydebugging=true;
+            keydebugging = true;
             //New textssssssss
             return;
         }
 
         private void Keys(object sender, KeyEventArgs e)
         {
-            if (Keyboard.IsKeyUp(Key.LeftShift))
-                test.Text += "LShift";
+            KeyConverter kc = new KeyConverter();
+            var displaykey = kc.ConvertToString(e.Key);
 
-            if (Keyboard.IsKeyUp(Key.RightShift))
-                test.Text += "RShift";
+            string[] defaultkeys = { "a" };
 
-            if (Keyboard.IsKeyUp(Key.LeftCtrl))
-                test.Text += "LControl";
+            if ((displaykey == "LeftShift") && (test.Text.Contains("LShift") == false)) 
+            { test.Text += "LShift"; }
 
-            if (Keyboard.IsKeyUp(Key.RightCtrl))
-                test.Text += "RControl";
+            
 
-            if (Keyboard.IsKeyUp(Key.LeftAlt))
-                test.Text += "LAlt";
-
-            if (Keyboard.IsKeyUp(Key.RightAlt))
-                test.Text += "RAlt";
 
         }
     }
