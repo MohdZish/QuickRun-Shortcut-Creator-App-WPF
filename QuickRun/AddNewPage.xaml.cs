@@ -82,30 +82,42 @@ namespace QuickRun
 
         private void Erase(object sender, RoutedEventArgs e)
         {
-            test.Text = "";
+            var window = Window.GetWindow(this);
+            test.Clear();
         }
 
+        public bool keydebugging = false;
         private void ListenToKeys(object sender, RoutedEventArgs e)
         {
             //AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)ListenToKeys
             var window = Window.GetWindow(this);
-            window.KeyDown += Keys;
+            if (keydebugging == false)
+            {
+                window.KeyUp += Keys;
+            }
+            keydebugging=true;
+            return;
         }
 
         private void Keys(object sender, KeyEventArgs e)
         {
-            if (Keyboard.IsKeyDown(Key.LeftShift))
+            if (Keyboard.IsKeyUp(Key.LeftShift))
                 test.Text += "LShift";
 
-            if (Keyboard.IsKeyDown(Key.RightShift))
+            if (Keyboard.IsKeyUp(Key.RightShift))
                 test.Text += "RShift";
 
-            if (Keyboard.IsKeyDown(Key.LeftCtrl))
+            if (Keyboard.IsKeyUp(Key.LeftCtrl))
                 test.Text += "LControl";
 
-            if (Keyboard.IsKeyDown(Key.RightCtrl))
+            if (Keyboard.IsKeyUp(Key.RightCtrl))
                 test.Text += "RControl";
 
+            if (Keyboard.IsKeyUp(Key.LeftAlt))
+                test.Text += "LAlt";
+
+            if (Keyboard.IsKeyUp(Key.RightAlt))
+                test.Text += "RAlt";
 
         }
     }
