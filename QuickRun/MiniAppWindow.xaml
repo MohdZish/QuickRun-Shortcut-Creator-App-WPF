@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QuickRun"
         mc:Ignorable="d"
         FocusManager.FocusedElement="{Binding ElementName=test}"
-        Title="MiniAppWindow" Height="200" Width="400" AllowsTransparency="True" WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize"
+        Title="MiniAppWindow" Height="180" Width="280" AllowsTransparency="True" WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize"
         xmlns:gif = "https://github.com/XamlAnimatedGif/XamlAnimatedGif"
         >
 

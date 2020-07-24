@@ -92,6 +92,7 @@ namespace QuickRun
                 namebutton.Width = 280;
                 namebutton.Height = 40;
                 namebutton.Tag = mon[0];
+                namebutton.Style = (Style)FindResource("RoundedButtonStyle");
                 itemname.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
                 itemname2.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
                 insidebutton.Children.Add(typecolor);
