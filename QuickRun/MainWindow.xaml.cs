@@ -72,7 +72,7 @@ namespace QuickRun
                 itemname2.Content = itemnameblock2;
                 itemnameblock2.TextAlignment = TextAlignment.Right;
                 itemnameblock.Text = mon[0]; //text of name
-                itemnameblock2.Text = mon[1];
+                itemnameblock2.Text = mon[3];
                 itemnameblock.Tag = mon[0];
                 itemname.HorizontalAlignment = HorizontalAlignment.Left;
                 itemname.HorizontalContentAlignment = HorizontalAlignment.Left;
@@ -103,7 +103,6 @@ namespace QuickRun
 
         private void AddNew(object sender, RoutedEventArgs e)
         {
-            
             AddNewPage newpagedashboard = new AddNewPage();
             AddNewPanel.Content = newpagedashboard;
         }
@@ -126,6 +125,13 @@ namespace QuickRun
                     }
                 }
             }
+        }
+
+        private void OpenMini(object sender, RoutedEventArgs e)
+        {
+            MiniAppWindow opennewmini = new MiniAppWindow();
+            opennewmini.ShowDialog();
+
         }
 
     }
