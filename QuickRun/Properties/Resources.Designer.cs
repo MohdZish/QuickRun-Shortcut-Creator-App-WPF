@@ -69,5 +69,25 @@ namespace QuickRun.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Montserrat {
+            get {
+                object obj = ResourceManager.GetObject("Montserrat", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Pacifico_Regular {
+            get {
+                object obj = ResourceManager.GetObject("Pacifico_Regular", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
