@@ -77,8 +77,8 @@ namespace QuickRun
             KeyConverter kc = new KeyConverter();
             var displaykey = kc.ConvertToString(e.Key);
 
-            string[] defaultkeys = { "LeftShift", "RightShift" }; //default ones!
-            string[] correctkeys = { "LShift", "RShift" }; //to display!
+            string[] defaultkeys = { "LeftShift", "RightShift", "Alt"}; //default ones!
+            string[] correctkeys = { "Shift", "Shift" }; //to display!
 
             int b = 0;
             foreach (string a in defaultkeys)

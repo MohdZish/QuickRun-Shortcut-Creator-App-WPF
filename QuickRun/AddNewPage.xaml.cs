@@ -33,6 +33,10 @@ namespace QuickRun
             listenbtn.Visibility = Visibility.Hidden;
             createbtn.Visibility = Visibility.Hidden;
             erasebtn.Visibility = Visibility.Hidden;
+            shiftbtn.Visibility = Visibility.Hidden;
+            ctrlbtn.Visibility = Visibility.Hidden;
+            altbtn.Visibility = Visibility.Hidden;
+            winbtn.Visibility = Visibility.Hidden;
         }
 
         private bool handle = true;
@@ -56,6 +60,10 @@ namespace QuickRun
             listenbtn.Visibility = Visibility.Visible;
             erasebtn.Visibility = Visibility.Visible;
             createbtn.Visibility = Visibility.Visible;
+            shiftbtn.Visibility = Visibility.Visible;
+            ctrlbtn.Visibility = Visibility.Visible;
+            altbtn.Visibility = Visibility.Visible;
+            winbtn.Visibility = Visibility.Visible;
         }
 
         private void Handle()
@@ -85,8 +93,6 @@ namespace QuickRun
                     ListenerVisible();
                     break;
             }
-
-
         }
 
         private void Backbtn(object sender, RoutedEventArgs e)
@@ -96,21 +102,71 @@ namespace QuickRun
             
         }
 
+        private void Reckey(object sender, RoutedEventArgs e)
+        {
+            Button tempbtn = sender as Button;
+            test.Text += tempbtn.Content + "+";
+
+            test.Focusable = true;
+            Keyboard.Focus(test);
+
+            test.CaretIndex = test.Text.Length;
+        }
+
         private void Erase(object sender, RoutedEventArgs e)
         {
             var window = Window.GetWindow(this);
             test.Clear();
+
         }
 
+        private void test_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (test.Text.Contains("Shift")) { shiftbtn.IsEnabled = false; }
+            if (test.Text.Contains("Ctrl")) { ctrlbtn.IsEnabled = false; }
+            if (test.Text.Contains("Alt")) { altbtn.IsEnabled = false; }
+            if (test.Text.Contains("Win")) { winbtn.IsEnabled = false; }
+
+            if (test.Text.Contains("Shift") == false) { shiftbtn.IsEnabled = true; }
+            if (test.Text.Contains("Ctrl") == false) { ctrlbtn.IsEnabled = true; }
+            if (test.Text.Contains("Alt") == false) { altbtn.IsEnabled = true; }
+            if (test.Text.Contains("Win") == false) { winbtn.IsEnabled = true; }
+        }
+
+
+
+
+
         public bool keydebugging = false;
+
+
+        private string LocateEXE(String filename)
+        {
+            String path = Environment.GetEnvironmentVariable("path");
+            String[] folders = path.Split(';');
+            foreach (String folder in folders)
+            {
+                if (File.Exists(folder + filename))
+                {
+                    return folder + filename;
+                }
+                else if (File.Exists(folder + "\\" + filename))
+                {
+                    return folder + "\\" + filename;
+                }
+            }
+
+            return String.Empty;
+        }
+
+
+
         private void ListenToKeys(object sender, RoutedEventArgs e)
         {
+            string pathToExe = LocateEXE("Adobe Premiere Pro.exe");
+            Console.WriteLine(pathToExe);
+            //Activator.CreateInstance(Type.GetTypeFromProgID("Notepad.Application"));
             //AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)ListenToKeys
-            if (test.Text.Contains("Click Listen to enter shortcut!"))
-            {
-                test.Text = "";
-            }
-            
             test.Focusable = true;
             Keyboard.Focus(test);
             test.CaretIndex = test.Text.Length;
@@ -128,6 +184,7 @@ namespace QuickRun
         {
             KeyConverter kc = new KeyConverter();
             var displaykey = kc.ConvertToString(e.Key);
+            Console.WriteLine(displaykey);
 
             string[] defaultkeys = {"LeftShift","RightShift"}; //default ones!
             string[] correctkeys = { "LShift", "RShift" }; //to display!
@@ -136,7 +193,7 @@ namespace QuickRun
             foreach(string a in defaultkeys)
             {
                 if ((displaykey == a) && (test.Text.Contains(correctkeys[b]) == false))
-                { test.Text += correctkeys[b] + "+"; }
+                { Console.WriteLine(defaultkeys[b]); }
                 b++;
             }
             test.CaretIndex = test.Text.Length;
