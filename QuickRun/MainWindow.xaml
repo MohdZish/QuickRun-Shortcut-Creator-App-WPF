@@ -129,7 +129,7 @@
             </Grid>
             <Grid>
                 <TextBlock Text="Recently Added" FontWeight="Bold" Foreground="Black" FontSize="10" Canvas.Top="10" Height="30" Width="89" Canvas.Left="36" Margin="5,44,45.333,311.333"/>
-                <Button Click="AddNew" VerticalAlignment="Top" BorderThickness="0"  Height="53" Background="#4c32a8" Foreground="White" BorderBrush="#FF37F3AE" Style="{DynamicResource RoundedButtonStyle}" Margin="0,64,0.333,0" HorizontalAlignment="Right" Width="129">
+                <Button Click="AddNew" VerticalAlignment="Top" BorderThickness="0"  Height="53" Background="#4c32a8" Foreground="White" BorderBrush="#FF37F3AE" Style="{DynamicResource RoundedButtonStyle}" Margin="0,66,5.333,0" HorizontalAlignment="Right" Width="129">
                     <Grid>
                         <TextBlock Text="Title" Foreground="White" Margin="-50,-16,48.333,16"  />
 
