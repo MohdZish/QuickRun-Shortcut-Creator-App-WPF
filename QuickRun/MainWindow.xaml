@@ -67,7 +67,7 @@
         </Style>
     </Window.Resources>
     <Window.Background>
-        <SolidColorBrush x:Name="BackgroundBrush" Opacity="1" Color="#fcfcfc"/>
+        <SolidColorBrush x:Name="BackgroundBrush" Opacity="1" Color="#f2f2f2"/>
     </Window.Background>
 
     <StackPanel>
