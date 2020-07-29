@@ -132,7 +132,6 @@
                 <Button Click="AddNew" VerticalAlignment="Top" BorderThickness="0"  Height="53" Background="#4c32a8" Foreground="White" BorderBrush="#FF37F3AE" Style="{DynamicResource RoundedButtonStyle}" Margin="0,66,5.333,0" HorizontalAlignment="Right" Width="129">
                     <Grid>
                         <TextBlock Text="Title" Foreground="White" Margin="-50,-16,48.333,16"  />
-
                     </Grid>
                 </Button>
             </Grid>
