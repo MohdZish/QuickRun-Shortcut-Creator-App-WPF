@@ -108,6 +108,12 @@ namespace QuickRun
             AddNewPanel.Content = newpagedashboard;
         }
 
+        private void Edit(object sender, RoutedEventArgs e)
+        {
+            AddNewPage newpagedashboard = new AddNewPage();
+            AddNewPanel.Content = newpagedashboard;
+        }
+
         public void GetInstalledApps()
         {
             string uninstallKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";

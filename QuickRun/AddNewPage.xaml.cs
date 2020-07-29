@@ -73,21 +73,18 @@ namespace QuickRun
                 case "Website":
                 case "Email":
                     softwaretext.Visibility = Visibility.Hidden;
-                    softwarebox.Visibility = Visibility.Hidden;
                     linktext.Visibility = Visibility.Visible;
                     linkbox.Visibility = Visibility.Visible;
                     ListenerVisible();
                     break;
                 case "Software":
                     softwaretext.Visibility = Visibility.Visible;
-                    softwarebox.Visibility = Visibility.Visible;
                     linktext.Visibility = Visibility.Hidden;
                     linkbox.Visibility = Visibility.Hidden;
                     ListenerVisible();
                     break;
                 case "Folder":
                     softwaretext.Visibility = Visibility.Hidden;
-                    softwarebox.Visibility = Visibility.Hidden;
                     linktext.Visibility = Visibility.Hidden;
                     linkbox.Visibility = Visibility.Hidden;
                     ListenerVisible();
@@ -204,7 +201,7 @@ namespace QuickRun
             string Name = nameinput.Text;
             string Type = Typebox.Text;
             string Value = ""; //the link/software/folder for example
-            if (softwarebox.Text != "") { Value = softwarebox.Text; }
+            //if (softwarebox.Text != "") { Value = softwarebox.Text; }
             if (linkbox.Text != "") { Value = linkbox.Text; }
             string Shortcut = test.Text;
             string Finaltext = Name +"-" + Type + "-" + Value + "-" + Shortcut + Environment.NewLine;

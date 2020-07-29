@@ -75,9 +75,9 @@
             </Button>
         </Canvas>
         <TextBlock x:Name="titlename" Margin="79,10,0,250" HorizontalAlignment="Left" Foreground="Black" FontSize="14" Width="147"><Run Text="Add you"/><Run Text="r"/><Run Text=" new "/><Run Text="Shortcut!"/></TextBlock>
-        <Label Content="Name : " FontFamily="Corbel Light" Margin="10,52,74,128"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="216"/>
+        <Label Content="Name : " FontFamily="Corbel Light" Margin="9,62,75,118"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="216"/>
         <TextBox x:Name="nameinput" FontSize="15" CaretBrush="Black" BorderThickness="1"  Text="" Margin="79,52,21,203" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="25" Width="200"  Background="#faf9f7" BorderBrush="#e3e3e3" Foreground="Black"/>
-        <Label Content="Type :" FontFamily="Corbel Light" Margin="10,91,221,89"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="69"/>
+        <Label Content="Type :" FontFamily="Corbel Light" Margin="9,101,222,79"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="69"/>
         <ComboBox Name="Typebox" IsTextSearchEnabled="True" IsEditable="True" SelectionChanged="Type_SelectionChanged" ItemsSource="{Binding ItemList}" Text="{Binding SearchTextText}"  Margin="79,91,21,164" Width="200" Height="25" HorizontalContentAlignment="Center" Opacity="0.9">
             <ComboBoxItem Content="Website"></ComboBoxItem>
             <ComboBoxItem Content="Email"></ComboBoxItem>
@@ -86,10 +86,10 @@
             <ComboBoxItem Content="Other"></ComboBoxItem>
         </ComboBox>
 
-        <Label x:Name="linktext" Content="Link :" Visibility="Collapsed" FontFamily="Corbel Light" Margin="10,132,74,48"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="216"/>
+        <Label x:Name="linktext" Content="Link :" Visibility="Collapsed" FontFamily="Corbel Light" Margin="10,139,74,48"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="216"/>
         <TextBox x:Name="linkbox" FontSize="15" CaretBrush="Black" BorderThickness="1"  Text="" Margin="79,132,21,123" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="25" Width="200"  Background="#faf9f7" BorderBrush="#e3e3e3" Foreground="Black"/>
 
-        <Label Name="softwaretext" Content="App :" FontFamily="Corbel Light" Margin="11,129,220,51"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="69"/>
+        <Label Name="softwaretext" Content="App :" FontFamily="Corbel Light" Margin="10,139,221,41"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="69"/>
         <ComboBox x:Name="softwarebox" IsTextSearchEnabled="True" IsEditable="True" ItemsSource="{Binding ItemList}" Text="{Binding SearchTextText}"  Margin="79,129,21,126" Width="200" Height="25" HorizontalContentAlignment="Center" Opacity="0.9">
             <ComboBoxItem Content="Website"></ComboBoxItem>
             <ComboBoxItem Content="Email"></ComboBoxItem>
