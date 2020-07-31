@@ -99,7 +99,13 @@ namespace QuickRun
                 insidebutton.Children.Add(itemname);
                 insidebutton.Children.Add(itemname2);
                 MyPanel.Children.Add(namebutton);
+
+                recenttitle.Text = mon[0];
             }
+
+
+
+
         }
 
         private void AddNew(object sender, RoutedEventArgs e)
