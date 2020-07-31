@@ -101,6 +101,7 @@ namespace QuickRun
                 MyPanel.Children.Add(namebutton);
 
                 recenttitle.Text = mon[0];
+                recentshortcut.Text = mon[3];
             }
 
 
