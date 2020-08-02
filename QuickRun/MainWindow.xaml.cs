@@ -48,6 +48,14 @@ namespace QuickRun
             MainPage.WindowState = WindowState.Minimized;
         }
 
+        public static string itemname { get; private set; }
+
+        private void itemnamemethod(object sender, RoutedEventArgs e)
+        {
+            string itemnametemp = (string)((Button)sender).Tag;
+            itemname = itemnametemp;
+        }
+
         private void LoadingScreen()
         {
             string[] readText = File.ReadAllLines(@"C:\test\test.txt");
@@ -93,6 +101,7 @@ namespace QuickRun
                 namebutton.Height = 40;
                 namebutton.Tag = mon[0];
                 namebutton.Style = (Style)FindResource("RoundedButtonStyle");
+                namebutton.Click += itemnamemethod;
                 itemname.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
                 itemname2.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
                 insidebutton.Children.Add(typecolor);

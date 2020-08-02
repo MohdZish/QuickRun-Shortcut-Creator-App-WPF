@@ -132,11 +132,16 @@
                 <Button Click="AddNew" VerticalAlignment="Top" BorderThickness="0"  Height="53" Background="#4c32a8" Foreground="White" BorderBrush="#FF37F3AE" Style="{DynamicResource RoundedButtonStyle}" Margin="0,66,5.333,0" HorizontalAlignment="Right" Width="129">
                     <Grid Height="53" Width="129">
                         <StackPanel>
-                            <TextBlock Text="Title" Margin="5 2 0 0" Name="recenttitle"  Foreground="White" Height="16" VerticalAlignment="Bottom" />
+                            <TextBlock Text="Title" Margin="5,2,-0.667,0" x:Name="recenttitle"  Foreground="White" Height="16" VerticalAlignment="Bottom" />
                             <TextBlock Text="Title" Margin="0 6 0 0" HorizontalAlignment="Center" x:Name="recentshortcut"  Foreground="White" Height="16" VerticalAlignment="Bottom" />
                         </StackPanel>
                     </Grid>
                 </Button>
+
+                <Grid>
+                    <Frame x:Name="ShowResultPanel" Margin="0 10 0 0" Height="280" Width="135" NavigationUIVisibility="Hidden"/>
+                </Grid>
+
             </Grid>
 
         </StackPanel>
