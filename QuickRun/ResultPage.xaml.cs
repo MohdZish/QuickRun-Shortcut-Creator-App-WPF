@@ -20,9 +20,17 @@ namespace QuickRun
     /// </summary>
     public partial class ResultPage : Page
     {
-        public ResultPage()
+        public ResultPage(string itemname)
         {
             InitializeComponent();
+            titlename.Text = itemname;
+        }
+
+        private void Backbtn(object sender, RoutedEventArgs e)
+        {
+            //AddNewPage.Visi = Visibility.Hidden;
+            this.Visibility = Visibility.Hidden;
+
         }
     }
 }

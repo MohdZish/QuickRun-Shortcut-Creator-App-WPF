@@ -139,7 +139,7 @@
                 </Button>
 
                 <Grid>
-                    <Frame x:Name="ShowResultPanel" Margin="0 10 0 0" Height="280" Width="135" NavigationUIVisibility="Hidden"/>
+                    <Frame x:Name="ShowResultPanel" Margin="2,45,2.333,60.333" Height="280" Width="135" NavigationUIVisibility="Hidden"/>
                 </Grid>
 
             </Grid>

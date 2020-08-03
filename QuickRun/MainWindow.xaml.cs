@@ -56,6 +56,14 @@ namespace QuickRun
             itemname = itemnametemp;
         }
 
+        private void Resultpagemethod(object sender, RoutedEventArgs e)
+        {
+            ResultPage dashboard = new ResultPage(itemname);
+
+            ShowResultPanel.Content = null;
+            ShowResultPanel.Content = dashboard;
+        }
+
         private void LoadingScreen()
         {
             string[] readText = File.ReadAllLines(@"C:\test\test.txt");
@@ -102,6 +110,7 @@ namespace QuickRun
                 namebutton.Tag = mon[0];
                 namebutton.Style = (Style)FindResource("RoundedButtonStyle");
                 namebutton.Click += itemnamemethod;
+                namebutton.Click += Resultpagemethod;
                 itemname.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
                 itemname2.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
                 insidebutton.Children.Add(typecolor);
@@ -156,6 +165,10 @@ namespace QuickRun
             opennewmini.ShowDialog();
 
         }
+
+
+
+        
 
     }
 }
