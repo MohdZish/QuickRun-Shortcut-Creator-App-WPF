@@ -49,16 +49,35 @@ namespace QuickRun
         }
 
         public static string itemname { get; private set; }
+        public static string itemtype { get; private set; }
+        public static string itemlink { get; private set; }
+        public static string itemshortcut { get; private set; }
 
         private void itemnamemethod(object sender, RoutedEventArgs e)
         {
             string itemnametemp = (string)((Button)sender).Tag;
+
+            string[] readText = File.ReadAllLines(@"C:\test\test.txt");
+            foreach (string text in readText)
+            {
+                string myString = text;
+                string[] mon = myString.Split('-');   //We're making array for mon[0] is name and mon[1] is shortcut
+
+                if(mon[0] == itemnametemp)
+                {
+                    itemtype = mon[1];
+                    itemlink = mon[2];
+                    itemshortcut = mon[3];
+                }
+            }
+
+
             itemname = itemnametemp;
         }
 
         private void Resultpagemethod(object sender, RoutedEventArgs e)
         {
-            ResultPage dashboard = new ResultPage(itemname);
+            ResultPage dashboard = new ResultPage(itemname, itemlink, itemtype, itemshortcut);
 
             ShowResultPanel.Content = null;
             ShowResultPanel.Content = dashboard;
