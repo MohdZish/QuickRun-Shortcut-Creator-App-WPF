@@ -97,6 +97,7 @@ namespace QuickRun
                 insidebutton.HorizontalAlignment = HorizontalAlignment.Left;
                 insidebutton.VerticalAlignment = VerticalAlignment.Top;
 
+
                 Label itemname = new Label();
                 Label itemname2 = new Label();
                 TextBlock itemnameblock = new TextBlock();
