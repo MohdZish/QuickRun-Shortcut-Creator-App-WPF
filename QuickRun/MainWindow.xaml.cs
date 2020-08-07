@@ -91,59 +91,67 @@ namespace QuickRun
                 string myString = text;
                 string[] mon = myString.Split('-');   //We're making array for mon[0] is name and mon[1] is shortcut
 
-                Button namebutton = new Button();
-                StackPanel insidebutton = new StackPanel();
-                insidebutton.Orientation = Orientation.Horizontal;
-                insidebutton.HorizontalAlignment = HorizontalAlignment.Left;
-                insidebutton.VerticalAlignment = VerticalAlignment.Top;
+                StackPanel insidebutton = new StackPanel()
+                {
+                    Orientation = Orientation.Horizontal,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Top,
+                };
 
+                Label itemname = new Label() //Item title
+                {
+                    Width = 120,
+                    Content = mon[0], //text of name
+                    Tag = mon[0],
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    HorizontalContentAlignment = HorizontalAlignment.Left,
+                    Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
+                };
 
-                Label itemname = new Label();
-                Label itemname2 = new Label();
+                Label itemname2 = new Label() //Item shortcut
+                {
+                    Width = 140,
+                    Content = mon[3],
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    HorizontalContentAlignment = HorizontalAlignment.Right,
+                    Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
+            };
+
                 System.Windows.Shapes.Path editlogo = new System.Windows.Shapes.Path()
                 {
-                   
                     Width = 13.866,
                     Height = 11.555
                 };
 
-                TextBlock itemnameblock = new TextBlock();
-                TextBlock itemnameblock2 = new TextBlock();
                 Canvas itemeditblock = new Canvas() { Width = 50 };
-                itemeditblock.Children.Add(editlogobox);
-                itemnameblock.Width = 100;
-                itemnameblock2.Width = 140;
-                itemname.Content = itemnameblock;
-                itemname2.Content = itemnameblock2;
-                itemnameblock2.TextAlignment = TextAlignment.Right;
-                itemnameblock.Text = mon[0]; //text of name
-                itemnameblock2.Text = mon[3];
-                itemnameblock.Tag = mon[0];
-                itemname.HorizontalAlignment = HorizontalAlignment.Left;
-                itemname.HorizontalContentAlignment = HorizontalAlignment.Left;
-                itemname2.HorizontalAlignment = HorizontalAlignment.Right;
-                itemname2.HorizontalContentAlignment = HorizontalAlignment.Right;
+                //itemeditblock.Children.Add(editlogobox);
 
-                Ellipse typecolor = new Ellipse();
-                //typecolor.Fill = new SolidColorBrush(Color.FromArgb(255, 12, 255, 210));
-                typecolor.Height = 5;
-                typecolor.Width = 5;
+                Ellipse typecolor = new Ellipse()
+                {
+                    Height = 5,
+                    Width = 5,
+                    Fill = new SolidColorBrush(Color.FromArgb(255, 12, 255, 210)),
+                 };
 
-                namebutton.Content = insidebutton;
-                namebutton.BorderThickness = new Thickness(0.5);
-                namebutton.Background = new SolidColorBrush(Color.FromArgb(125, 250, 249, 247));
-                namebutton.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 186, 186, 186));
-                namebutton.Margin = new Thickness(5);
-                namebutton.Width = 280;
-                namebutton.Height = 40;
-                namebutton.Tag = mon[0];
-                namebutton.Style = (Style)FindResource("RoundedButtonStyle");
+
+                Button namebutton = new Button()
+                {
+                    Content = insidebutton,
+                    BorderThickness = new Thickness(0.5),
+                    Background = new SolidColorBrush(Color.FromArgb(125, 250, 249, 247)),
+                    BorderBrush = new SolidColorBrush(Color.FromArgb(255, 186, 186, 186)),
+                    Margin = new Thickness(5),
+                    Width = 280,
+                    Height = 40,
+                    Tag = mon[0],
+                    Style = (Style)FindResource("RoundedButtonStyle")
+                    
+            };
                 namebutton.Click += itemnamemethod;
                 namebutton.Click += Resultpagemethod;
-                itemname.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
-                itemname2.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+
+                
                 insidebutton.Children.Add(typecolor);
-                insidebutton.Children.Add(itemeditblock);
                 insidebutton.Children.Add(itemname);
                 insidebutton.Children.Add(itemname2);
                 MyPanel.Children.Add(namebutton);
@@ -151,10 +159,6 @@ namespace QuickRun
                 recenttitle.Text = mon[0];
                 recentshortcut.Text = mon[3];
             }
-
-
-
-
         }
 
         private void AddNew(object sender, RoutedEventArgs e)
