@@ -119,6 +119,7 @@
                 <Grid>
                     <WrapPanel x:Name="MyPanel" Margin="10 10 0 0" Background="#0011131B" Height="280" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
                     <Frame x:Name="AddNewPanel" Margin="10 10 0 0" Height="300" Width="300" NavigationUIVisibility="Hidden"/>
+                    <Path x:Name="editlogobox" Width="13.866" Height="11.555" Canvas.Top="8.167" Stretch="Fill" Fill="Black" Data="F1 M 53.2929,21.2929L 54.7071,22.7071C 56.4645,24.4645 56.4645,27.3137 54.7071,29.0711L 52.2323,31.5459L 44.4541,23.7677L 46.9289,21.2929C 48.6863,19.5355 51.5355,19.5355 53.2929,21.2929 Z M 31.7262,52.052L 23.948,44.2738L 43.0399,25.182L 50.818,32.9601L 31.7262,52.052 Z M 23.2409,47.1023L 28.8977,52.7591L 21.0463,54.9537L 23.2409,47.1023 Z " Canvas.Left="5.4" Margin="10.666,44.333,286.8,254.111"/>
 
                 </Grid>
 

@@ -100,8 +100,17 @@ namespace QuickRun
 
                 Label itemname = new Label();
                 Label itemname2 = new Label();
+                System.Windows.Shapes.Path editlogo = new System.Windows.Shapes.Path()
+                {
+                   
+                    Width = 13.866,
+                    Height = 11.555
+                };
+
                 TextBlock itemnameblock = new TextBlock();
                 TextBlock itemnameblock2 = new TextBlock();
+                Canvas itemeditblock = new Canvas() { Width = 50 };
+                itemeditblock.Children.Add(editlogobox);
                 itemnameblock.Width = 100;
                 itemnameblock2.Width = 140;
                 itemname.Content = itemnameblock;
@@ -134,6 +143,7 @@ namespace QuickRun
                 itemname.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
                 itemname2.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
                 insidebutton.Children.Add(typecolor);
+                insidebutton.Children.Add(itemeditblock);
                 insidebutton.Children.Add(itemname);
                 insidebutton.Children.Add(itemname2);
                 MyPanel.Children.Add(namebutton);
