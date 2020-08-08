@@ -83,9 +83,12 @@ namespace QuickRun
             ShowResultPanel.Content = dashboard;
         }
 
+        public static bool IsEditOn = false; 
         private void LoadingScreen()
         {
             string[] readText = File.ReadAllLines(@"C:\test\test.txt");
+
+            MyPanel.Children.Clear();
             foreach (string text in readText)
             {
                 string myString = text;
@@ -115,7 +118,7 @@ namespace QuickRun
                     HorizontalAlignment = HorizontalAlignment.Right,
                     HorizontalContentAlignment = HorizontalAlignment.Right,
                     Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
-            };
+                 };
 
                 System.Windows.Shapes.Path editlogo = new System.Windows.Shapes.Path()
                 {
@@ -146,7 +149,7 @@ namespace QuickRun
                     Tag = mon[0],
                     Style = (Style)FindResource("RoundedButtonStyle")
                     
-            };
+                 };
                 namebutton.Click += itemnamemethod;
                 namebutton.Click += Resultpagemethod;
 
@@ -158,6 +161,12 @@ namespace QuickRun
 
                 recenttitle.Text = mon[0];
                 recentshortcut.Text = mon[3];
+
+                if (IsEditOn)
+                {
+                    namebutton.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 52, 149, 235));
+                    namebutton.BorderThickness = new Thickness(1);
+                }
             }
         }
 
@@ -169,8 +178,23 @@ namespace QuickRun
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            AddNewPage newpagedashboard = new AddNewPage();
-            AddNewPanel.Content = newpagedashboard;
+            while (true)
+            {
+                if (!IsEditOn) {
+                    buttonedit.Background = new SolidColorBrush(Color.FromArgb(255, 145, 220, 255));
+                    IsEditOn = true;
+                    LoadingScreen();
+                    break;
+                }
+                if(IsEditOn)
+                {
+                    buttonedit.Background = new SolidColorBrush(Color.FromArgb(255, 250, 249, 247));
+                    IsEditOn = false;
+                    LoadingScreen();
+                    break;
+                }
+            }
+
         }
 
         public void GetInstalledApps()
@@ -199,10 +223,6 @@ namespace QuickRun
             opennewmini.ShowDialog();
 
         }
-
-
-
-        
 
     }
 }

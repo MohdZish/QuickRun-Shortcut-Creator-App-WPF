@@ -96,7 +96,6 @@ namespace QuickRun
         {
             //AddNewPage.Visi = Visibility.Hidden;
             this.Visibility = Visibility.Hidden;
-            
         }
 
         private void Reckey(object sender, RoutedEventArgs e)
