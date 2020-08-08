@@ -83,10 +83,20 @@ namespace QuickRun
             ShowResultPanel.Content = dashboard;
         }
 
+        private void Editpagemethod(object sender, RoutedEventArgs e)
+        {
+            EditPage newpagedashboard = new EditPage(itemname, itemlink, itemtype, itemshortcut);
+            EditPanel.Content = newpagedashboard;
+        }
+
         public static bool IsEditOn = false; 
         private void LoadingScreen()
         {
             string[] readText = File.ReadAllLines(@"C:\test\test.txt");
+            int numberofwebsites = 0;
+            int numberofsoftwares = 0;
+            int numberoffolders = 0;
+            int numberofothers = 0;
 
             MyPanel.Children.Clear();
             foreach (string text in readText)
@@ -133,8 +143,33 @@ namespace QuickRun
                 {
                     Height = 5,
                     Width = 5,
-                    Fill = new SolidColorBrush(Color.FromArgb(255, 12, 255, 210)),
-                 };
+                };
+
+                string type = mon[1]; 
+
+
+                switch (type)
+                {
+                    case "Website":
+                        typecolor.Fill = new SolidColorBrush(Color.FromArgb(255, 12, 255, 210));
+                        numberofwebsites += 1;
+                        break;
+
+                    case "Software":
+                        typecolor.Fill = new SolidColorBrush(Color.FromArgb(255, 12, 151, 255));
+                        numberofsoftwares += 1;
+                        break;
+
+                    case "Folder":
+                        typecolor.Fill = new SolidColorBrush(Color.FromArgb(255, 252, 169, 3));
+                        numberoffolders += 1;
+                        break;
+
+                    case "Other":
+                        typecolor.Fill = new SolidColorBrush(Color.FromArgb(255, 232, 94, 94));
+                        numberofothers += 1;
+                        break;
+                }
 
 
                 Button namebutton = new Button()
@@ -151,13 +186,30 @@ namespace QuickRun
                     
                  };
                 namebutton.Click += itemnamemethod;
-                namebutton.Click += Resultpagemethod;
+
+                if(IsEditOn == false)
+                {
+                    namebutton.Click += Resultpagemethod;
+                }
+                
+                if(IsEditOn == true)
+                {
+                    namebutton.Click += Editpagemethod;
+                }
 
                 
                 insidebutton.Children.Add(typecolor);
                 insidebutton.Children.Add(itemname);
                 insidebutton.Children.Add(itemname2);
-                MyPanel.Children.Add(namebutton);
+                if(sortfor == "")
+                {
+                    MyPanel.Children.Add(namebutton);
+                }
+                
+                if(sortfor == mon[1])
+                {
+                    MyPanel.Children.Add(namebutton);
+                }
 
                 recenttitle.Text = mon[0];
                 recentshortcut.Text = mon[3];
@@ -167,7 +219,44 @@ namespace QuickRun
                     namebutton.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 52, 149, 235));
                     namebutton.BorderThickness = new Thickness(1);
                 }
+
             }
+
+            //for category number count
+            websitecount.Text = Convert.ToString(numberofwebsites);
+            softwarecount.Text = Convert.ToString(numberofsoftwares);
+            foldercount.Text = Convert.ToString(numberoffolders);
+            othercount.Text = Convert.ToString(numberofothers);
+        }
+
+        public string sortfor = "";
+        private void ButtonSort(object sender, RoutedEventArgs e)
+        {
+            
+            string buttonText = ((Button)sender).Name;
+            switch (buttonText)
+            {
+                case "buttonwebsite":
+                    sortfor = "Website";
+                    break;
+                case "buttonsoftware":
+                    sortfor = "Software";
+                    break;
+                case "buttonfolder":
+                    sortfor = "Folder";
+                    break;
+                case "buttonother":
+                    sortfor = "Other";
+                    break;
+            }
+
+            LoadingScreen();
+        }
+
+        private void Dashboard(object sender, RoutedEventArgs e)
+        {
+            sortfor = "";
+            LoadingScreen();
         }
 
         private void AddNew(object sender, RoutedEventArgs e)
