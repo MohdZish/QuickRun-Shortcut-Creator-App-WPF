@@ -88,6 +88,25 @@ namespace QuickRun
             EditPanel.Content = newpagedashboard;
         }
 
+        private void DeleteItem(object sender, RoutedEventArgs e)
+        {
+            //We're creating a new array finalText to store new set of itemlist
+            string[] readText = File.ReadAllLines(@"C:\test\test.txt");
+            string[] finalText = new string[readText.Length - 1];
+
+            for (int i = 0; i < readText.Length; i++)
+            {
+                string[] mon = readText[i].Split('-'); //We're making array for mon[0] is name and mon[1] is shortcut
+
+                if(mon[0] != itemname)
+                {
+                    finalText[i] = readText[i];
+                }
+            }
+            File.WriteAllLines(@"C:\test\test.txt", finalText);
+
+        }
+
         public static bool IsEditOn = false; 
         private void LoadingScreen()
         {
@@ -222,10 +241,9 @@ namespace QuickRun
                     namebutton.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 204, 30, 14));
                     namebutton.BorderThickness = new Thickness(1);
                     IsEditOn = false;
-
+                    namebutton.Click += DeleteItem;
+                    LoadingScreen();
                 }
-
-
             }
 
             //for category number count
