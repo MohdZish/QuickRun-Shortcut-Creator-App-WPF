@@ -26,7 +26,6 @@ namespace QuickRun
         {
             InitializeComponent();
             LoadingScreen();
-
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -195,6 +194,9 @@ namespace QuickRun
                 if(IsEditOn == true)
                 {
                     namebutton.Click += Editpagemethod;
+                    namebutton.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 52, 149, 235));
+                    namebutton.BorderThickness = new Thickness(1);
+                    IsDeleteOn = false;
                 }
 
                 
@@ -214,11 +216,15 @@ namespace QuickRun
                 recenttitle.Text = mon[0];
                 recentshortcut.Text = mon[3];
 
-                if (IsEditOn)
+
+                if (IsDeleteOn)
                 {
-                    namebutton.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 52, 149, 235));
+                    namebutton.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 204, 30, 14));
                     namebutton.BorderThickness = new Thickness(1);
+                    IsEditOn = false;
+
                 }
+
 
             }
 
@@ -279,6 +285,32 @@ namespace QuickRun
                 {
                     buttonedit.Background = new SolidColorBrush(Color.FromArgb(255, 250, 249, 247));
                     IsEditOn = false;
+                    LoadingScreen();
+                    break;
+                }
+            }
+        }
+
+        public bool IsDeleteOn = false;
+        private void Delete(object sender, RoutedEventArgs e)
+        {
+            while (true)
+            {
+                if (!IsDeleteOn)
+                {
+                    buttondelete.Background = new SolidColorBrush(Color.FromArgb(255, 204, 30, 14));
+                    deletetext.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+                    deletelogo.Fill = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+                    IsDeleteOn = true;
+                    LoadingScreen();
+                    break;
+                }
+                if (IsDeleteOn)
+                {
+                    buttondelete.Background = new SolidColorBrush(Color.FromArgb(255, 250, 249, 247));
+                    deletetext.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+                    deletelogo.Fill = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+                    IsDeleteOn = false;
                     LoadingScreen();
                     break;
                 }

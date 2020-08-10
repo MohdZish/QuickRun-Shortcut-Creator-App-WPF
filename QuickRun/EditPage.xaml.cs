@@ -30,7 +30,6 @@ namespace QuickRun
             linktext.Visibility = Visibility.Hidden;
             linkbox.Visibility = Visibility.Hidden;
             test.Visibility = Visibility.Hidden;
-            listenbtn.Visibility = Visibility.Hidden;
             createbtn.Visibility = Visibility.Hidden;
             erasebtn.Visibility = Visibility.Hidden;
             shiftbtn.Visibility = Visibility.Hidden;
@@ -38,15 +37,20 @@ namespace QuickRun
             altbtn.Visibility = Visibility.Hidden;
             winbtn.Visibility = Visibility.Hidden;
 
-
+            oldtitle = itemname;
             nameinput.Text = itemname;
-           /* int selecttype = 0;
+            linkbox.Text = itemlink;
+            test.Text = itemshortcut;
+            int selecttype = 0;
             if (itemtype == "Website") { selecttype = 0; }
             if (itemtype == "Software") { selecttype = 1; }
             if (itemtype == "Folder") { selecttype = 2; }
             if (itemtype == "Other") { selecttype = 3; }
-            Typebox.SelectedIndex = selecttype;*/
+            Typebox.SelectedIndex = selecttype;
+            Typebox.SelectedItem = itemtype;
         }
+
+        public string oldtitle = "";
 
         private bool handle = true;
 
@@ -66,7 +70,6 @@ namespace QuickRun
         private void ListenerVisible()
         {
             test.Visibility = Visibility.Visible;
-            listenbtn.Visibility = Visibility.Visible;
             erasebtn.Visibility = Visibility.Visible;
             createbtn.Visibility = Visibility.Visible;
             shiftbtn.Visibility = Visibility.Visible;
@@ -204,19 +207,39 @@ namespace QuickRun
             test.CaretIndex = test.Text.Length;
         }
 
-        private void CreateShortcut(object sender, RoutedEventArgs e)
+        private void EditShortcut(object sender, RoutedEventArgs e)
         {
-            string Name = nameinput.Text;
+            /*string Name = nameinput.Text;
             string Type = Typebox.Text;
             string Value = ""; //the link/software/folder for example
             //if (softwarebox.Text != "") { Value = softwarebox.Text; }
             if (linkbox.Text != "") { Value = linkbox.Text; }
             string Shortcut = test.Text;
             string Finaltext = Name + "-" + Type + "-" + Value + "-" + Shortcut + Environment.NewLine;
-            File.AppendAllText(@"C:\test\test.txt", Finaltext);
+            File.AppendAllText(@"C:\test\test.txt", Finaltext);*/
+
+
+            string[] readText = File.ReadAllLines(@"C:\test\test.txt");
+            for(int i = 0; i <readText.Length; i++)
+            {
+                string[] mon = readText[i].Split('-');   //We're making array for mon[0] is name and mon[1] is shortcut
+
+                string Name = nameinput.Text;
+                string Type = Typebox.Text;
+                string Value = ""; //the link/software/folder for example
+                                   //if (softwarebox.Text != "") { Value = softwarebox.Text; }
+                if (linkbox.Text != "") { Value = linkbox.Text; }
+                string Shortcut = test.Text;
+
+                if (mon[0] == oldtitle)
+                {
+                    readText[i] = Name + "-" + Type + "-" + Value + "-" + Shortcut;
+                }
+
+            }
+            File.WriteAllLines(@"C:\test\test.txt", readText);
+
         }
 
-
-
-    }
+        }
 }
