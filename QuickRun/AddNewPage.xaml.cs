@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace QuickRun
 {
@@ -83,7 +84,7 @@ namespace QuickRun
                     linkbox.Visibility = Visibility.Hidden;
                     ListenerVisible();
                     break;
-                case "Folder":
+                case "File/Folder":
                     softwaretext.Visibility = Visibility.Hidden;
                     linktext.Visibility = Visibility.Hidden;
                     linkbox.Visibility = Visibility.Hidden;
@@ -113,7 +114,27 @@ namespace QuickRun
         {
             var window = Window.GetWindow(this);
             test.Clear();
+        }
+        public string browselink = "";
+        private void Browsefile(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog browse = new OpenFileDialog();
+            browse.ShowDialog();
+            string sFileName = browse.FileName;
+            browselink = sFileName;
+            browsepath.Content = sFileName;
+            browsepath.Visibility = Visibility.Visible;
+        }
 
+        private void Browsefolder(object sender, RoutedEventArgs e)
+        {
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+                browselink = dialog.SelectedPath;
+                browsepath.Content = browselink;
+                browsepath.Visibility = Visibility.Visible;
+            }
         }
 
         private void test_TextChanged(object sender, TextChangedEventArgs e)
@@ -128,9 +149,6 @@ namespace QuickRun
             if (test.Text.Contains("Alt") == false) { altbtn.IsEnabled = true; }
             if (test.Text.Contains("Win") == false) { winbtn.IsEnabled = true; }
         }
-
-
-
 
 
         public bool keydebugging = false;
@@ -199,15 +217,20 @@ namespace QuickRun
         {
             string Name = nameinput.Text;
             string Type = Typebox.Text;
-            string Value = ""; //the link/software/folder for example
-            //if (softwarebox.Text != "") { Value = softwarebox.Text; }
+            if(Typebox.Text == "File/Folder")
+            {
+                Type = "Folder"; //Just to keep File/Folder as Folder simply
+            }
+            string Value = "";
+            if (Type == "Folder")
+            {
+                Value = browselink;
+            }
+            
             if (linkbox.Text != "") { Value = linkbox.Text; }
             string Shortcut = test.Text;
             string Finaltext = Name +"-" + Type + "-" + Value + "-" + Shortcut + Environment.NewLine;
             File.AppendAllText(@"C:\test\test.txt", Finaltext);
         }
-
-
-
     }
 }

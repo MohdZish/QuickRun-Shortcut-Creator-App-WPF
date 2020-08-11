@@ -50,10 +50,10 @@ namespace QuickRun
             MainPage.WindowState = WindowState.Minimized;
         }
 
-        public static string itemname { get; private set; }
-        public static string itemtype { get; private set; }
-        public static string itemlink { get; private set; }
-        public static string itemshortcut { get; private set; }
+        public string itemname = "";
+        public string itemtype = "";
+        public string itemlink = "";
+        public string itemshortcut = "";
 
         private void itemnamemethod(object sender, RoutedEventArgs e)
         {
@@ -93,23 +93,30 @@ namespace QuickRun
             newpagedashboard.AppMainWindow = this;
             EditPanel.Content = newpagedashboard;
         }
-        private void DeleteItem(object sender, RoutedEventArgs e)
+        public void DeleteItem(object sender, RoutedEventArgs e)
         {
             //We're creating a new array finalText to store new set of itemlist
             string[] readText = File.ReadAllLines(@"C:\test\test.txt");
             string[] finalText = new string[readText.Length - 1];
 
+            /*Google-Website-www.google.com-Shift+G
+            Premiere Pro-Software-C/PremierePro/Adobe/Pro.exe-Shift+P
+            LinkedIn-Folder-C/Windows/Folders/Myfolder-Shift+L
+            Amazon-Other-www.amazon.com-Shift+A
+            Test File-Folder-C:\test\test.txt-Shift+T*/
+            int j = 0;
+            var fintext = new List<string>();
             for (int i = 0; i < readText.Length; i++)
             {
                 string[] mon = readText[i].Split('-'); //We're making array for mon[0] is name and mon[1] is shortcut
 
                 if(mon[0] != itemname)
                 {
-                    finalText[i] = readText[i];
+                    fintext.Add(readText[i]);
                 }
             }
 
-            File.WriteAllLines(@"C:\test\test.txt", finalText);
+            File.WriteAllLines(@"C:\test\test.txt", fintext);
             LoadingScreen();
 
             MenuPopUp(itemname + " is deleted!");
@@ -290,13 +297,15 @@ namespace QuickRun
                     IsEditOn = false;
                     namebutton.Click += DeleteItem;
                 }
+
+                //for category number count
+                websitecount.Text = Convert.ToString(numberofwebsites);
+                softwarecount.Text = Convert.ToString(numberofsoftwares);
+                foldercount.Text = Convert.ToString(numberoffolders);
+                othercount.Text = Convert.ToString(numberofothers);
             }
 
-            //for category number count
-            websitecount.Text = Convert.ToString(numberofwebsites);
-            softwarecount.Text = Convert.ToString(numberofsoftwares);
-            foldercount.Text = Convert.ToString(numberoffolders);
-            othercount.Text = Convert.ToString(numberofothers);
+            
 
             //To finish animation
             firsttime = false;
@@ -410,7 +419,6 @@ namespace QuickRun
         {
             MiniAppWindow opennewmini = new MiniAppWindow();
             opennewmini.ShowDialog();
-
         }
 
     }

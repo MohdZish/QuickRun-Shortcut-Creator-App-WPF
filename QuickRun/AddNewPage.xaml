@@ -80,7 +80,7 @@
         <Label Content="Type :" FontFamily="Corbel Light" Margin="9,101,222,79"  HorizontalAlignment="Center" Foreground="Black" FontSize="15" Width="69"/>
         <ComboBox Name="Typebox" IsTextSearchEnabled="True" IsEditable="True" SelectionChanged="Type_SelectionChanged" ItemsSource="{Binding ItemList}" Text="{Binding SearchTextText}"  Margin="79,91,21,164" Width="200" Height="25" HorizontalContentAlignment="Center" Opacity="0.9">
             <ComboBoxItem Content="Website"></ComboBoxItem>
-            <ComboBoxItem Content="Folder"></ComboBoxItem>
+            <ComboBoxItem Content="File/Folder"></ComboBoxItem>
             <ComboBoxItem Content="Software"></ComboBoxItem>
             <ComboBoxItem Content="Other"></ComboBoxItem>
         </ComboBox>
@@ -104,6 +104,14 @@
                 <TextBlock Text="Listen"  Canvas.Left="14" Canvas.Top="5"/>
             </Canvas>
         </Button>
+
+        <Button x:Name="browsebtn" Content="Browse File" Click="Browsefile" VerticalAlignment="Top" Margin="19,139,157,0" BorderThickness="1.5"  Height="25" Background="#faf9f7" Foreground="Black" BorderBrush="#e3e3e3" Style="{DynamicResource RoundedButtonStyle}">
+        </Button>
+
+        <Button x:Name="browsebtn2" Content="Browse Folder" Click="Browsefolder" VerticalAlignment="Top" Margin="155,139,21,0" BorderThickness="1.5"  Height="25" Background="#faf9f7" Foreground="Black" BorderBrush="#e3e3e3" Style="{DynamicResource RoundedButtonStyle}">
+        </Button>
+
+        <Label x:Name="browsepath" Visibility="Collapsed" HorizontalContentAlignment="Center" Content="Link"  FontFamily="Corbel Light"  HorizontalAlignment="Center" Foreground="Black" FontSize="10" Width="260" Margin="19,159,21,121"/>
 
         <Button Click="Reckey" Style="{DynamicResource RoundedButtonStyle}" Content="Shift" FontSize="10" Name="shiftbtn" VerticalAlignment="Top" Margin="19,225,249,0" BorderThickness="0.5 0.5 0.5 2"  Height="20" Background="#faf9f7" Foreground="Black" BorderBrush="gray"></Button>
 

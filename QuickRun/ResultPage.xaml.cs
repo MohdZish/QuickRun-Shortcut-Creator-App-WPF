@@ -61,6 +61,14 @@ namespace QuickRun
             this.Visibility = Visibility.Hidden;
         }
 
+        public void Delete(object sender, RoutedEventArgs e)
+        {
+            var myObject = this.Owner as MainWindow;
+            myObject.itemname = name;
+            buttondelete.Click += myObject.DeleteItem;
+            this.Visibility = Visibility.Hidden;
+        }
+
         private void Backbtn(object sender, RoutedEventArgs e)
         {
             //AddNewPage.Visi = Visibility.Hidden;

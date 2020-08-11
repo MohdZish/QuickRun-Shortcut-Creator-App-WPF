@@ -211,15 +211,6 @@ namespace QuickRun
 
         private void EditShortcut(object sender, RoutedEventArgs e)
         {
-            /*string Name = nameinput.Text;
-            string Type = Typebox.Text;
-            string Value = ""; //the link/software/folder for example
-            //if (softwarebox.Text != "") { Value = softwarebox.Text; }
-            if (linkbox.Text != "") { Value = linkbox.Text; }
-            string Shortcut = test.Text;
-            string Finaltext = Name + "-" + Type + "-" + Value + "-" + Shortcut + Environment.NewLine;
-            File.AppendAllText(@"C:\test\test.txt", Finaltext);*/
-
 
             string[] readText = File.ReadAllLines(@"C:\test\test.txt");
             for(int i = 0; i <readText.Length; i++)

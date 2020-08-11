@@ -130,9 +130,9 @@ namespace QuickRun
             test.Clear();
         }
 
-        private void gotofolder(string folderurl)
+        private void gotofolder(string @folderurl)
         {
-            Process.Start(folderurl);
+            Process.Start(@folderurl);
             test.Clear();
         }
 
