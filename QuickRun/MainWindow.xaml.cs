@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -27,6 +28,8 @@ namespace QuickRun
             InitializeComponent();
             LoadingScreen();
         }
+
+        
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -70,24 +73,26 @@ namespace QuickRun
                 }
             }
 
-
             itemname = itemnametemp;
         }
 
         private void Resultpagemethod(object sender, RoutedEventArgs e)
         {
             ResultPage dashboard = new ResultPage(itemname, itemlink, itemtype, itemshortcut);
-
+            dashboard.Owner = Window.GetWindow(this);
+            dashboard.AppMainWindow = this;
             ShowResultPanel.Content = null;
             ShowResultPanel.Content = dashboard;
         }
 
-        private void Editpagemethod(object sender, RoutedEventArgs e)
+        public MainWindow AppMainWindow { get; set; }
+        public void Editpagemethod(object sender, RoutedEventArgs e)
         {
             EditPage newpagedashboard = new EditPage(itemname, itemlink, itemtype, itemshortcut);
+            newpagedashboard.Owner = Window.GetWindow(this);
+            newpagedashboard.AppMainWindow = this;
             EditPanel.Content = newpagedashboard;
         }
-
         private void DeleteItem(object sender, RoutedEventArgs e)
         {
             //We're creating a new array finalText to store new set of itemlist
@@ -103,14 +108,47 @@ namespace QuickRun
                     finalText[i] = readText[i];
                 }
             }
+
             File.WriteAllLines(@"C:\test\test.txt", finalText);
             LoadingScreen();
+
+            MenuPopUp(itemname + " is deleted!");
         }
 
-        public static bool IsEditOn = false;
+        public async Task MenuPopUp(string Text)
+        {
+            await MenuPopUp1(Text);
+            await MenuPopUp2(Text);
+        }
+
+        public async Task MenuPopUp1(string text)  //Animation first part
+        {
+            popuptext.Content = text;
+            TranslateTransform trans = new TranslateTransform();
+            popupbar.RenderTransform = trans;
+            DoubleAnimation anim1 = new DoubleAnimation(0, -50, TimeSpan.FromSeconds(0.7));
+            trans.BeginAnimation(TranslateTransform.YProperty, anim1);
+
+            //The delay between the two animations
+            await Task.Delay(5 * 1000);
+        }
+        public async Task MenuPopUp2(string text)  //Animation Second part
+        {
+            popuptext.Content = text;
+            TranslateTransform trans = new TranslateTransform();
+            popupbar.RenderTransform = trans;
+            DoubleAnimation anim2 = new DoubleAnimation(-50, 0, TimeSpan.FromSeconds(0.7));
+            trans.BeginAnimation(TranslateTransform.YProperty, anim2);
+
+        }
+
+
+        public bool IsEditOn = false;
 
         public string[] readText;
-        private void LoadingScreen()
+
+        public bool firsttime = true; //For animation in the beginning
+        public async void LoadingScreen()
         {
             readText = File.ReadAllLines(@"C:\test\test.txt");
             int numberofwebsites = 0;
@@ -130,7 +168,6 @@ namespace QuickRun
                     HorizontalAlignment = HorizontalAlignment.Left,
                     VerticalAlignment = VerticalAlignment.Top,
                 };
-
                 Label itemname = new Label() //Item title
                 {
                     Width = 120,
@@ -140,7 +177,6 @@ namespace QuickRun
                     HorizontalContentAlignment = HorizontalAlignment.Left,
                     Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
                 };
-
                 Label itemname2 = new Label() //Item shortcut
                 {
                     Width = 140,
@@ -149,16 +185,12 @@ namespace QuickRun
                     HorizontalContentAlignment = HorizontalAlignment.Right,
                     Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
                  };
-
                 System.Windows.Shapes.Path editlogo = new System.Windows.Shapes.Path()
                 {
                     Width = 13.866,
                     Height = 11.555
                 };
-
                 Canvas itemeditblock = new Canvas() { Width = 50 };
-                //itemeditblock.Children.Add(editlogobox);
-
                 Ellipse typecolor = new Ellipse()
                 {
                     Height = 5,
@@ -166,7 +198,6 @@ namespace QuickRun
                 };
 
                 string type = mon[1]; 
-
 
                 switch (type)
                 {
@@ -189,8 +220,7 @@ namespace QuickRun
                         typecolor.Fill = new SolidColorBrush(Color.FromArgb(255, 232, 94, 94));
                         numberofothers += 1;
                         break;
-                }
-
+                }  //for typecolor in itembox
 
                 Button namebutton = new Button()
                 {
@@ -224,14 +254,29 @@ namespace QuickRun
                 insidebutton.Children.Add(typecolor);
                 insidebutton.Children.Add(itemname);
                 insidebutton.Children.Add(itemname2);
+
+                //Final display of the items
                 if(sortfor == "")
                 {
                     MyPanel.Children.Add(namebutton);
+                    if(firsttime == true)
+                    {
+                        var animation = new DoubleAnimation
+                        {
+                            From = 0,
+                            To = 1,
+                            Duration = TimeSpan.FromSeconds(0.5),
+                            FillBehavior = FillBehavior.Stop
+                        };
+                        namebutton.BeginAnimation(Button.OpacityProperty, animation);
+                        await Task.Delay(3 * 100);
+                    }
                 }
                 
                 if(sortfor == mon[1])
                 {
                     MyPanel.Children.Add(namebutton);
+                    
                 }
 
                 recenttitle.Text = mon[0];
@@ -252,6 +297,9 @@ namespace QuickRun
             softwarecount.Text = Convert.ToString(numberofsoftwares);
             foldercount.Text = Convert.ToString(numberoffolders);
             othercount.Text = Convert.ToString(numberofothers);
+
+            //To finish animation
+            firsttime = false;
         }
 
 
@@ -291,7 +339,7 @@ namespace QuickRun
             AddNewPanel.Content = newpagedashboard;
         }
 
-        private void Edit(object sender, RoutedEventArgs e)
+        public void Edit(object sender, RoutedEventArgs e)
         {
             while (true)
             {

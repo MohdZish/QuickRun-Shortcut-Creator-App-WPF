@@ -183,7 +183,11 @@
                 </Button>
 
                 <Grid>
-                    <Frame x:Name="ShowResultPanel" Margin="2,45,2.333,60.333" Height="280" Width="145" NavigationUIVisibility="Hidden"/>
+                    <Frame x:Name="ShowResultPanel" Margin="2,50,2.333,79.333" Width="145" NavigationUIVisibility="Hidden"/>
+                    <Canvas x:Name="popupbar" Margin="2,297,-1.667,-27.667" Height="126" VerticalAlignment="Top">
+                        <Rectangle Fill="#4c32a8" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Canvas.Left="8" Canvas.Top="75"/>
+                        <Label x:Name="popuptext" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" Content="Text here" Canvas.Left="8" Canvas.Top="75" Width="130"></Label>
+                    </Canvas>
                 </Grid>
 
             </Grid>

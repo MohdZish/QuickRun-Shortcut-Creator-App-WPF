@@ -147,6 +147,8 @@ namespace QuickRun
 
         public bool keydebugging = false;
 
+        public Window Owner { get; internal set; }
+        public MainWindow AppMainWindow { get; internal set; }
 
         private string LocateEXE(String filename)
         {
@@ -235,11 +237,22 @@ namespace QuickRun
                 {
                     readText[i] = Name + "-" + Type + "-" + Value + "-" + Shortcut;
                 }
-
+                
             }
             File.WriteAllLines(@"C:\test\test.txt", readText);
 
-        }
+            //CALLING FUNCTION FROM ANOTHER WINDOW !!!!!!!! Change function you call to PUBLIC (not PRIVATE)
+            //You can also access strings or items if public! Dont use STATIC!
+            Window mainWindow = this.Owner;
+            var myObject = this.Owner as MainWindow;
+            myObject.MenuPopUp(oldtitle + " modified!");
+            myObject.IsEditOn = false;
+            myObject.buttonedit.Background = new SolidColorBrush(Color.FromArgb(255, 250, 249, 247));
+            myObject.LoadingScreen();
+
+            this.Visibility = Visibility.Hidden;
 
         }
+
+    }
 }

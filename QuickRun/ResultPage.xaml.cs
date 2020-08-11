@@ -22,6 +22,14 @@ namespace QuickRun
     /// </summary>
     public partial class ResultPage : Page
     {
+        public string name = "";
+        public string link = "";
+        public string type = "";
+        public string shortcut = "";
+
+        public Window Owner { get; internal set; }
+        public MainWindow AppMainWindow { get; internal set; }
+
         public ResultPage(string itemname, string itemlink, string itemtype, string itemshortcut)
         {
             InitializeComponent();
@@ -33,15 +41,24 @@ namespace QuickRun
             }
             shortcuttext.Text = itemshortcut;
             //shortcutbox.Width = itemshortcut.Length;
+            name = itemname;
+            link = itemlink;
+            type = itemtype;
+            shortcut = itemshortcut;
         }
 
         private void gotolink(object sender, MouseButtonEventArgs e)
         {
             Process.Start(linktext.Text);
         }
-        private void gotolink(string link)
+
+        public void Edit(object sender, RoutedEventArgs e)
         {
-            
+            EditPage newpagedashboard = new EditPage(name, link, type, shortcut);
+            var myObject = this.Owner as MainWindow;
+            newpagedashboard.Owner = this.Owner;
+            myObject.EditPanel.Content = newpagedashboard;
+            this.Visibility = Visibility.Hidden;
         }
 
         private void Backbtn(object sender, RoutedEventArgs e)
