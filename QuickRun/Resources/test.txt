@@ -1,0 +1,4 @@
+Google-Website-www.google.com-Shift+g
+Premiere Pro-Software-C/PremierePro/Adobe/Pro.exe-Shift+P
+LinkedIn-Folder-C/Windows/Folders/Myfolder-Shift+L
+Amazon-Other-www.amazon.com-Shift+a

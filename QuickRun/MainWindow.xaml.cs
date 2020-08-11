@@ -104,13 +104,15 @@ namespace QuickRun
                 }
             }
             File.WriteAllLines(@"C:\test\test.txt", finalText);
-
+            LoadingScreen();
         }
 
-        public static bool IsEditOn = false; 
+        public static bool IsEditOn = false;
+
+        public string[] readText;
         private void LoadingScreen()
         {
-            string[] readText = File.ReadAllLines(@"C:\test\test.txt");
+            readText = File.ReadAllLines(@"C:\test\test.txt");
             int numberofwebsites = 0;
             int numberofsoftwares = 0;
             int numberoffolders = 0;
@@ -242,7 +244,6 @@ namespace QuickRun
                     namebutton.BorderThickness = new Thickness(1);
                     IsEditOn = false;
                     namebutton.Click += DeleteItem;
-                    LoadingScreen();
                 }
             }
 
@@ -252,6 +253,7 @@ namespace QuickRun
             foldercount.Text = Convert.ToString(numberoffolders);
             othercount.Text = Convert.ToString(numberofothers);
         }
+
 
         public string sortfor = "";
         private void ButtonSort(object sender, RoutedEventArgs e)
