@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace QuickRun
 {
@@ -36,11 +37,13 @@ namespace QuickRun
             ctrlbtn.Visibility = Visibility.Hidden;
             altbtn.Visibility = Visibility.Hidden;
             winbtn.Visibility = Visibility.Hidden;
+            
 
             oldtitle = itemname;
             nameinput.Text = itemname;
             linkbox.Text = itemlink;
             test.Text = itemshortcut;
+            
             int selecttype = 0;
             if (itemtype == "Website") { selecttype = 0; }
             if (itemtype == "Software") { selecttype = 1; }
@@ -48,6 +51,8 @@ namespace QuickRun
             if (itemtype == "Other") { selecttype = 3; }
             Typebox.SelectedIndex = selecttype;
             Typebox.SelectedItem = itemtype;
+
+            browsepath.Content = itemlink;
         }
 
         public string oldtitle = "";
@@ -84,24 +89,52 @@ namespace QuickRun
             {
                 case "Website":
                 case "Email":
+                case "Other":
                     softwaretext.Visibility = Visibility.Hidden;
                     linktext.Visibility = Visibility.Visible;
                     linkbox.Visibility = Visibility.Visible;
+                    browsebtn.Visibility = Visibility.Hidden;
+                    browsebtn2.Visibility = Visibility.Hidden;
+                    browsebtn.Visibility = Visibility.Hidden;
+                    browsebtn2.Visibility = Visibility.Hidden;
+                    browsesoftware.Visibility = Visibility.Hidden;
+                    browsepath.Visibility = Visibility.Hidden;
                     ListenerVisible();
                     break;
                 case "Software":
-                    softwaretext.Visibility = Visibility.Visible;
-                    linktext.Visibility = Visibility.Hidden;
-                    linkbox.Visibility = Visibility.Hidden;
-                    ListenerVisible();
-                    break;
-                case "Folder":
                     softwaretext.Visibility = Visibility.Hidden;
                     linktext.Visibility = Visibility.Hidden;
                     linkbox.Visibility = Visibility.Hidden;
+                    browsebtn.Visibility = Visibility.Hidden;
+                    browsebtn2.Visibility = Visibility.Hidden;
+                    browsesoftware.Visibility = Visibility.Visible;
+                    browsepath.Visibility = Visibility.Visible;
+                    ListenerVisible();
+                    break;
+                case "Folder":
+                case "File/Folder":
+                    softwaretext.Visibility = Visibility.Hidden;
+                    linktext.Visibility = Visibility.Hidden;
+                    linkbox.Visibility = Visibility.Hidden;
+                    browsebtn.Visibility = Visibility.Visible;
+                    browsebtn2.Visibility = Visibility.Visible;
+                    browsepath.Visibility = Visibility.Visible;
+                    browsesoftware.Visibility = Visibility.Hidden;
+                    browsepath.Visibility = Visibility.Hidden;
                     ListenerVisible();
                     break;
             }
+        }
+
+        private void Browseexe(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog browse = new OpenFileDialog();
+            browse.Filter = "Exe Files (.exe)|*.exe|All Files (*.*)|*.*";
+            browse.ShowDialog();
+            string sFileName = browse.FileName;
+            browselink = sFileName;
+            browsepath.Content = sFileName;
+            browsepath.Visibility = Visibility.Visible;
         }
 
         private void Backbtn(object sender, RoutedEventArgs e)
@@ -209,24 +242,63 @@ namespace QuickRun
             test.CaretIndex = test.Text.Length;
         }
 
+        public string browselink = "";
+        private void Browsefile(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog browse = new OpenFileDialog();
+            browse.ShowDialog();
+            string sFileName = browse.FileName;
+            browselink = sFileName;
+            browsepath.Content = sFileName;
+            browsepath.Visibility = Visibility.Visible;
+        }
+
+        private void Browsefolder(object sender, RoutedEventArgs e)
+        {
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+                browselink = dialog.SelectedPath;
+                browsepath.Content = browselink;
+                browsepath.Visibility = Visibility.Visible;
+            }
+        }
+
         private void EditShortcut(object sender, RoutedEventArgs e)
         {
 
             string[] readText = File.ReadAllLines(@"C:\test\test.txt");
             for(int i = 0; i <readText.Length; i++)
             {
-                string[] mon = readText[i].Split('-');   //We're making array for mon[0] is name and mon[1] is shortcut
+                string[] mon = readText[i].Split('=');   //We're making array for mon[0] is name and mon[1] is shortcut
 
                 string Name = nameinput.Text;
                 string Type = Typebox.Text;
-                string Value = ""; //the link/software/folder for example
-                                   //if (softwarebox.Text != "") { Value = softwarebox.Text; }
-                if (linkbox.Text != "") { Value = linkbox.Text; }
+
+                string Value = "";
+                if (Typebox.Text == "File/Folder")
+                {
+                    Type = "Folder"; //Just to keep File/Folder as Folder simply
+                }
+
+                if (Type == "Folder")
+                {
+                    Value = browselink;
+                }
+                if (Type == "Software")
+                {
+                    Value = browselink;
+                }
+                if (Type == "Website" || Type == "Other")
+                {
+                    Value = linkbox.Text;
+                }
+
                 string Shortcut = test.Text;
 
                 if (mon[0] == oldtitle)
                 {
-                    readText[i] = Name + "-" + Type + "-" + Value + "-" + Shortcut;
+                    readText[i] = Name + "=" + Type + "=" + Value + "=" + Shortcut;
                 }
                 
             }
@@ -243,7 +315,10 @@ namespace QuickRun
 
             this.Visibility = Visibility.Hidden;
 
+
         }
+
+        
 
     }
 }

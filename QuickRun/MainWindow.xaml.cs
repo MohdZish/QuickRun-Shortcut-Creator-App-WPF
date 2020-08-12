@@ -63,7 +63,7 @@ namespace QuickRun
             foreach (string text in readText)
             {
                 string myString = text;
-                string[] mon = myString.Split('-');   //We're making array for mon[0] is name and mon[1] is shortcut
+                string[] mon = myString.Split('=');   //We're making array for mon[0] is name and mon[1] is shortcut
 
                 if(mon[0] == itemnametemp)
                 {
@@ -108,7 +108,7 @@ namespace QuickRun
             var fintext = new List<string>();
             for (int i = 0; i < readText.Length; i++)
             {
-                string[] mon = readText[i].Split('-'); //We're making array for mon[0] is name and mon[1] is shortcut
+                string[] mon = readText[i].Split('='); //We're making array for mon[0] is name and mon[1] is shortcut
 
                 if(mon[0] != itemname)
                 {
@@ -167,7 +167,7 @@ namespace QuickRun
             foreach (string text in readText)
             {
                 string myString = text;
-                string[] mon = myString.Split('-');   //We're making array for mon[0] is name and mon[1] is shortcut
+                string[] mon = myString.Split('=');   //We're making array for mon[0] is name and mon[1] is shortcut
 
                 StackPanel insidebutton = new StackPanel()
                 {
@@ -244,7 +244,7 @@ namespace QuickRun
                  };
                 namebutton.Click += itemnamemethod;
 
-                if(IsEditOn == false)
+                if(IsEditOn == false && IsDeleteOn == false)
                 {
                     namebutton.Click += Resultpagemethod;
                 }
@@ -345,6 +345,8 @@ namespace QuickRun
         private void AddNew(object sender, RoutedEventArgs e)
         {
             AddNewPage newpagedashboard = new AddNewPage();
+            newpagedashboard.Owner = this;
+            newpagedashboard.AppMainWindow = this;
             AddNewPanel.Content = newpagedashboard;
         }
 

@@ -99,14 +99,14 @@ namespace QuickRun
             foreach (string text in readText)
             {
                 string myString = text;
-                mon = myString.Split('-');   //We're making array for mon[0] is name and mon[1] is shortcut
+                mon = myString.Split('=');   //We're making array for mon[0] is name and mon[1] is shortcut
                 Console.WriteLine(mon[0]);
 
 
                 bool result = test.Text.Equals(mon[3], StringComparison.OrdinalIgnoreCase);
                 if (result) { 
                     
-                    if(mon[1] == "Website" || mon[1] == "Email")
+                    if(mon[1] == "Website" || mon[1] == "Other")
                     {
                         gotolink(mon[2]);
                     }
@@ -118,8 +118,10 @@ namespace QuickRun
 
                     if (mon[1] == "Software")
                     {
-                        gotofolder(mon[2]);
+                        gotosoftware(mon[2]);
                     }
+
+
                 }
             }
         }
@@ -138,7 +140,7 @@ namespace QuickRun
 
         private void gotosoftware(string softwareurl)
         {
-            Process.Start(softwareurl);
+            Process.Start(@softwareurl);
             test.Clear();
         }
 

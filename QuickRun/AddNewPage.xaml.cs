@@ -38,6 +38,9 @@ namespace QuickRun
             ctrlbtn.Visibility = Visibility.Hidden;
             altbtn.Visibility = Visibility.Hidden;
             winbtn.Visibility = Visibility.Hidden;
+            browsebtn.Visibility = Visibility.Hidden;
+            browsebtn2.Visibility = Visibility.Hidden;
+            browsesoftware.Visibility = Visibility.Hidden;
         }
 
         private bool handle = true;
@@ -73,21 +76,31 @@ namespace QuickRun
             {
                 case "Website":
                 case "Email":
+                case "Other":
                     softwaretext.Visibility = Visibility.Hidden;
                     linktext.Visibility = Visibility.Visible;
                     linkbox.Visibility = Visibility.Visible;
+                    browsesoftware.Visibility = Visibility.Hidden;
+                    browsebtn.Visibility = Visibility.Hidden;
+                    browsebtn2.Visibility = Visibility.Hidden;
                     ListenerVisible();
                     break;
                 case "Software":
-                    softwaretext.Visibility = Visibility.Visible;
+                    softwaretext.Visibility = Visibility.Hidden;
                     linktext.Visibility = Visibility.Hidden;
                     linkbox.Visibility = Visibility.Hidden;
+                    browsesoftware.Visibility = Visibility.Visible;
+                    browsebtn.Visibility = Visibility.Hidden;
+                    browsebtn2.Visibility = Visibility.Hidden;
                     ListenerVisible();
                     break;
                 case "File/Folder":
                     softwaretext.Visibility = Visibility.Hidden;
                     linktext.Visibility = Visibility.Hidden;
                     linkbox.Visibility = Visibility.Hidden;
+                    browsebtn.Visibility = Visibility.Visible;
+                    browsebtn2.Visibility = Visibility.Visible;
+                    browsesoftware.Visibility = Visibility.Hidden;
                     ListenerVisible();
                     break;
             }
@@ -136,7 +149,16 @@ namespace QuickRun
                 browsepath.Visibility = Visibility.Visible;
             }
         }
-
+        private void Browseexe(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog browse = new OpenFileDialog();
+            browse.Filter = "Exe Files (.exe)|*.exe|All Files (*.*)|*.*";
+            browse.ShowDialog();
+            string sFileName = browse.FileName;
+            browselink = sFileName;
+            browsepath.Content = sFileName;
+            browsepath.Visibility = Visibility.Visible;
+        }
         private void test_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (test.Text.Contains("Shift")) { shiftbtn.IsEnabled = false; }
@@ -150,9 +172,10 @@ namespace QuickRun
             if (test.Text.Contains("Win") == false) { winbtn.IsEnabled = true; }
         }
 
-
         public bool keydebugging = false;
 
+        public MainWindow Owner { get; internal set; }
+        public MainWindow AppMainWindow { get; internal set; }
 
         private string LocateEXE(String filename)
         {
@@ -226,11 +249,23 @@ namespace QuickRun
             {
                 Value = browselink;
             }
-            
+            if (Type == "Software")
+            {
+                Value = browselink;
+            }
+
             if (linkbox.Text != "") { Value = linkbox.Text; }
             string Shortcut = test.Text;
-            string Finaltext = Name +"-" + Type + "-" + Value + "-" + Shortcut + Environment.NewLine;
+            string Finaltext = Name +"=" + Type + "=" + Value + "=" + Shortcut + Environment.NewLine;
             File.AppendAllText(@"C:\test\test.txt", Finaltext);
+
+            this.Visibility = Visibility.Hidden;
+
+            //Calling Main window functions!
+            var myObject = this.Owner as MainWindow;
+            myObject.MenuPopUp(Name + " created!");
+            myObject.LoadingScreen();
+
         }
     }
 }
