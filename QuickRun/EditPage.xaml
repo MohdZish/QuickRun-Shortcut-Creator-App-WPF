@@ -105,8 +105,8 @@
 
         <Button x:Name="browsesoftware" Content="Browse .exe file" Click="Browseexe" VerticalAlignment="Top" Margin="19,139,21,0" BorderThickness="1.5"  Height="25" Background="#faf9f7" Foreground="Black" BorderBrush="#e3e3e3" Style="{DynamicResource RoundedButtonStyle}">
         </Button>
-        
-        <Label x:Name="browsepath" Visibility="Hidden" HorizontalContentAlignment="Center" Content="Link"  FontFamily="Corbel Light"  HorizontalAlignment="Center" Foreground="Black" FontSize="10" Width="260" Margin="19,159,21,121"/>
+        <TextBlock x:Name="browsepath" TextAlignment="Center" VerticalAlignment="Center" Text="Link"  FontFamily="Corbel Light" Foreground="Black" FontSize="10" Width="260" Margin="19,159,21,121"/>
+
 
         <TextBox x:Name="test" TextChanged="test_TextChanged" FontSize="15" CaretBrush="Black" BorderThickness="1"  VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Width="260"  Background="#faf9f7" BorderBrush="#e3e3e3" Foreground="Black" Canvas.Left="-203" Canvas.Top="5" Margin="19,179,21,81"/>
 

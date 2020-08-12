@@ -124,6 +124,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\OpenSans-Light.ttf" />
+    <Resource Include="Resources\OpenSans-Regular.ttf" />
+    <Resource Include="Resources\Roboto-Medium.ttf" />
     <Resource Include="Resources\Pacifico-Regular.ttf" />
     <Resource Include="Resources\Montserrat.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

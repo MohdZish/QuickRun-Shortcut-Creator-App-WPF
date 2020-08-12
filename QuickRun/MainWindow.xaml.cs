@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Diagnostics;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -158,6 +159,9 @@ namespace QuickRun
         public async void LoadingScreen()
         {
             readText = File.ReadAllLines(@"C:\test\test.txt");
+
+            
+
             int numberofwebsites = 0;
             int numberofsoftwares = 0;
             int numberoffolders = 0;
@@ -266,7 +270,11 @@ namespace QuickRun
                 if(sortfor == "")
                 {
                     MyPanel.Children.Add(namebutton);
-                    if(firsttime == true)
+                    if (readText.Length > 5)
+                    {
+                        namebutton.Width = 270;
+                    }
+                    if (firsttime == true)
                     {
                         var animation = new DoubleAnimation
                         {
@@ -303,9 +311,10 @@ namespace QuickRun
                 softwarecount.Text = Convert.ToString(numberofsoftwares);
                 foldercount.Text = Convert.ToString(numberoffolders);
                 othercount.Text = Convert.ToString(numberofothers);
-            }
 
-            
+
+                
+            }
 
             //To finish animation
             firsttime = false;
@@ -420,7 +429,31 @@ namespace QuickRun
         private void OpenMini(object sender, RoutedEventArgs e)
         {
             MiniAppWindow opennewmini = new MiniAppWindow();
+            this.Close();
             opennewmini.ShowDialog();
+        }
+
+        private void openmyfacebook(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://www.facebook.com/mohammed.zishan.338/");
+        }
+
+        private void openmygithub(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/MohdZish");
+        }
+
+        private void openmyyoutube(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://www.youtube.com/channel/UCjK0Oq2XAo-oBEoytkSmYAg");
+        }
+
+        private void Recent(object sender, RoutedEventArgs e)
+        {
+            if(recenttitle.Text == "Add your first")
+            {
+                
+            }
         }
 
     }

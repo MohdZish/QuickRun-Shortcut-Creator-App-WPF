@@ -40,9 +40,14 @@ namespace QuickRun
             
 
             oldtitle = itemname;
+            oldtype = itemtype;
+            oldlink = itemlink;
+            oldshortcut = itemshortcut;
+
             nameinput.Text = itemname;
             linkbox.Text = itemlink;
             test.Text = itemshortcut;
+            browsepath.Text = itemlink;
             
             int selecttype = 0;
             if (itemtype == "Website") { selecttype = 0; }
@@ -52,10 +57,13 @@ namespace QuickRun
             Typebox.SelectedIndex = selecttype;
             Typebox.SelectedItem = itemtype;
 
-            browsepath.Content = itemlink;
+            browsepath.Text = itemlink;
         }
 
         public string oldtitle = "";
+        public string oldtype = "";
+        public string oldlink = "";
+        public string oldshortcut = "";
 
         private bool handle = true;
 
@@ -133,7 +141,7 @@ namespace QuickRun
             browse.ShowDialog();
             string sFileName = browse.FileName;
             browselink = sFileName;
-            browsepath.Content = sFileName;
+            browsepath.Text = sFileName;
             browsepath.Visibility = Visibility.Visible;
         }
 
@@ -249,7 +257,7 @@ namespace QuickRun
             browse.ShowDialog();
             string sFileName = browse.FileName;
             browselink = sFileName;
-            browsepath.Content = sFileName;
+            browsepath.Text = sFileName;
             browsepath.Visibility = Visibility.Visible;
         }
 
@@ -259,61 +267,130 @@ namespace QuickRun
             {
                 System.Windows.Forms.DialogResult result = dialog.ShowDialog();
                 browselink = dialog.SelectedPath;
-                browsepath.Content = browselink;
+                browsepath.Text = browselink;
                 browsepath.Visibility = Visibility.Visible;
             }
         }
 
+
         private void EditShortcut(object sender, RoutedEventArgs e)
         {
+            bool namecondition = false;
+            bool shortcutcondition = false;
+            string error = "";
+            string Name = nameinput.Text;
+            string Type = Typebox.Text;
+
+            string Value = browsepath.Text;
+            if (Typebox.Text == "File/Folder")
+            {
+                Type = "Folder"; //Just to keep File/Folder as Folder simply
+            }
+
+            if (Type == "Folder")
+            {
+                Value = browsepath.Text;
+            }
+            if (Type == "Software")
+            {
+                Value = browsepath.Text;
+            }
+            if (Type == "Website" || Type == "Other")
+            {
+                Value = linkbox.Text;
+            }
+
+            string Shortcut = test.Text;
 
             string[] readText = File.ReadAllLines(@"C:\test\test.txt");
-            for(int i = 0; i <readText.Length; i++)
+            for(int i=0; i<readText.Length; i++)
             {
                 string[] mon = readText[i].Split('=');   //We're making array for mon[0] is name and mon[1] is shortcut
 
-                string Name = nameinput.Text;
-                string Type = Typebox.Text;
-
-                string Value = "";
-                if (Typebox.Text == "File/Folder")
+                if (mon[0] != oldtitle && mon[2] != oldlink && mon[3] != oldshortcut)
                 {
-                    Type = "Folder"; //Just to keep File/Folder as Folder simply
+                    if (Name.Equals(mon[0], StringComparison.OrdinalIgnoreCase))
+                    {
+                        namecondition = true;
+                    }
+
+                    if (Shortcut.Equals(mon[3], StringComparison.OrdinalIgnoreCase))
+                    {
+                        shortcutcondition = true;
+                    }
                 }
 
-                if (Type == "Folder")
+                else
                 {
-                    Value = browselink;
-                }
-                if (Type == "Software")
-                {
-                    Value = browselink;
-                }
-                if (Type == "Website" || Type == "Other")
-                {
-                    Value = linkbox.Text;
+                    if(namecondition == false && shortcutcondition == false)
+                    {
+                        readText[i] = Name + "=" + Type + "=" + Value + "=" + Shortcut;
+                        File.WriteAllLines(@"C:\test\test.txt", readText);
+
+                        //CALLING FUNCTION FROM ANOTHER WINDOW !!!!!!!! Change function you call to PUBLIC (not PRIVATE)
+                        //You can also access strings or items if public! Dont use STATIC!
+                        Window mainWindow = this.Owner;
+                        var myObject = this.Owner as MainWindow;
+                        myObject.MenuPopUp(oldtitle + " modified!");
+                        myObject.IsEditOn = false;
+                        myObject.buttonedit.Background = new SolidColorBrush(Color.FromArgb(255, 250, 249, 247));
+                        myObject.LoadingScreen();
+
+                        this.Visibility = Visibility.Hidden;
+                    }
+
+                    else
+                    {
+                        Window mainWindow = this.Owner;
+                        var myObject = this.Owner as MainWindow;
+                        myObject.MenuPopUp(" already exists!");
+                        myObject.IsEditOn = false;
+                        myObject.buttonedit.Background = new SolidColorBrush(Color.FromArgb(255, 250, 249, 247));
+                    }
                 }
 
-                string Shortcut = test.Text;
 
-                if (mon[0] == oldtitle)
+
+
+                /*Conditions
+                if(Name.Equals(mon[0], StringComparison.OrdinalIgnoreCase))
+                {
+                    namecondition += 1;
+                }
+
+                if (Shortcut.Equals(mon[3], StringComparison.OrdinalIgnoreCase))
+                {
+                    shortcutcondition += 1;
+                }
+
+                if (mon[0] == oldtitle && namecondition == 1) //SUCCESS
                 {
                     readText[i] = Name + "=" + Type + "=" + Value + "=" + Shortcut;
+                    File.WriteAllLines(@"C:\test\test.txt", readText);
+
+                    //CALLING FUNCTION FROM ANOTHER WINDOW !!!!!!!! Change function you call to PUBLIC (not PRIVATE)
+                    //You can also access strings or items if public! Dont use STATIC!
+                    Window mainWindow = this.Owner;
+                    var myObject = this.Owner as MainWindow;
+                    myObject.MenuPopUp(oldtitle + " modified!");
+                    myObject.IsEditOn = false;
+                    myObject.buttonedit.Background = new SolidColorBrush(Color.FromArgb(255, 250, 249, 247));
+                    myObject.LoadingScreen();
+
+                    this.Visibility = Visibility.Hidden;
                 }
-                
+
+                if (namecondition >= 2)
+                {
+                    Window mainWindow = this.Owner;
+                    var myObject = this.Owner as MainWindow;
+                    myObject.MenuPopUp(error + " already exists!");
+                    myObject.IsEditOn = false;
+                    myObject.buttonedit.Background = new SolidColorBrush(Color.FromArgb(255, 250, 249, 247));
+                }*/
+
             }
-            File.WriteAllLines(@"C:\test\test.txt", readText);
 
-            //CALLING FUNCTION FROM ANOTHER WINDOW !!!!!!!! Change function you call to PUBLIC (not PRIVATE)
-            //You can also access strings or items if public! Dont use STATIC!
-            Window mainWindow = this.Owner;
-            var myObject = this.Owner as MainWindow;
-            myObject.MenuPopUp(oldtitle + " modified!");
-            myObject.IsEditOn = false;
-            myObject.buttonedit.Background = new SolidColorBrush(Color.FromArgb(255, 250, 249, 247));
-            myObject.LoadingScreen();
-
-            this.Visibility = Visibility.Hidden;
 
 
         }

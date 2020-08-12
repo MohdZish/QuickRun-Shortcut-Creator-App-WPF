@@ -245,26 +245,57 @@ namespace QuickRun
                 Type = "Folder"; //Just to keep File/Folder as Folder simply
             }
             string Value = "";
-            if (Type == "Folder")
+            if (Type == "Folder" || Type == "Software")
             {
                 Value = browselink;
             }
-            if (Type == "Software")
-            {
-                Value = browselink;
-            }
+            
 
             if (linkbox.Text != "") { Value = linkbox.Text; }
             string Shortcut = test.Text;
-            string Finaltext = Name +"=" + Type + "=" + Value + "=" + Shortcut + Environment.NewLine;
-            File.AppendAllText(@"C:\test\test.txt", Finaltext);
 
-            this.Visibility = Visibility.Hidden;
+            //Conditions
+            string[] readText = File.ReadAllLines(@"C:\test\test.txt");
+            bool condition = true;
+            string error = "";
 
-            //Calling Main window functions!
-            var myObject = this.Owner as MainWindow;
-            myObject.MenuPopUp(Name + " created!");
-            myObject.LoadingScreen();
+            foreach (string text in readText)
+            {
+                string myString = text;
+                string[] mon = myString.Split('=');   //We're making array for mon[0] is name and mon[1] is shortcut
+            
+                if(Name.Equals(mon[0], StringComparison.OrdinalIgnoreCase))
+                {
+                    condition = false;
+                    error = Name;
+                }
+                if (Shortcut.Equals(mon[3], StringComparison.OrdinalIgnoreCase))  //Compares new shortcut to every existing ones.
+                {
+                    condition = false;
+                    error = Shortcut;
+                }
+            }
+
+
+            if(condition == true)
+            {
+                string Finaltext = Name + "=" + Type + "=" + Value + "=" + Shortcut + Environment.NewLine;
+                File.AppendAllText(@"C:\test\test.txt", Finaltext);
+
+                this.Visibility = Visibility.Hidden;
+
+                //Calling Main window functions!
+                var myObject = this.Owner as MainWindow;
+                myObject.MenuPopUp(Name + " created!");
+                myObject.LoadingScreen();
+            }
+
+            else
+            {
+                var myObject = this.Owner as MainWindow;
+                myObject.MenuPopUp(error + " already exists!");
+                myObject.LoadingScreen();
+            }
 
         }
     }

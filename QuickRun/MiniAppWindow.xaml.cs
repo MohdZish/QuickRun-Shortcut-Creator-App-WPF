@@ -31,6 +31,7 @@ namespace QuickRun
             Keyboard.Focus(test);
             test.CaretIndex = test.Text.Length;
             ListenToKeys();
+
             //textreading();
         }
         private void Buttonclose(object sender, RoutedEventArgs e)
@@ -41,6 +42,14 @@ namespace QuickRun
         private void Buttonminimise(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void BacktoMenu(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            this.Close();
+            main.ShowDialog();
+            
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -91,60 +100,47 @@ namespace QuickRun
         }
 
         string[] mon;
+        string[] readText = File.ReadAllLines(@"C:\test\test.txt");
 
         private void test_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
-            string[] readText = File.ReadAllLines(@"C:\test\test.txt");
             foreach (string text in readText)
             {
                 string myString = text;
                 mon = myString.Split('=');   //We're making array for mon[0] is name and mon[1] is shortcut
-                Console.WriteLine(mon[0]);
-
+                
 
                 bool result = test.Text.Equals(mon[3], StringComparison.OrdinalIgnoreCase);
-                if (result) { 
+                while (result) { 
                     
                     if(mon[1] == "Website" || mon[1] == "Other")
                     {
-                        gotolink(mon[2]);
+                        Process.Start(mon[2]);
+                        test.Clear();
+                        Console.WriteLine(mon[0] + "open");
+                        break;
                     }
 
                     if (mon[1] == "Folder")
                     {
-                        gotofolder(mon[2]);
+                        Process.Start(@mon[2]);
+                        test.Clear();
+                        Console.WriteLine(mon[0] + "open");
+                        break;
                     }
 
                     if (mon[1] == "Software")
                     {
-                        gotosoftware(mon[2]);
+                        Process.Start(@mon[2]);
+                        test.Clear();
+                        Console.WriteLine(mon[0] + "open");
+                        break;
                     }
 
 
                 }
             }
         }
-
-        private void gotolink(string link)
-        {
-            Process.Start(link);
-            test.Clear();
-        }
-
-        private void gotofolder(string @folderurl)
-        {
-            Process.Start(@folderurl);
-            test.Clear();
-        }
-
-        private void gotosoftware(string softwareurl)
-        {
-            Process.Start(@softwareurl);
-            test.Clear();
-        }
-
-
 
     }
 }
