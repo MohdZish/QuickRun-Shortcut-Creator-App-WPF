@@ -270,7 +270,7 @@ namespace QuickRun
                 if(sortfor == "")
                 {
                     MyPanel.Children.Add(namebutton);
-                    if (readText.Length > 5)
+                    if (readText.Length >= 6)
                     {
                         namebutton.Width = 270;
                     }
@@ -353,10 +353,10 @@ namespace QuickRun
 
         private void AddNew(object sender, RoutedEventArgs e)
         {
-            AddNewPage newpagedashboard = new AddNewPage();
-            newpagedashboard.Owner = this;
-            newpagedashboard.AppMainWindow = this;
-            AddNewPanel.Content = newpagedashboard;
+                AddNewPage newpagedashboard = new AddNewPage();
+                newpagedashboard.Owner = this;
+                newpagedashboard.AppMainWindow = this;
+                AddNewPanel.Content = newpagedashboard;
         }
 
         public void Edit(object sender, RoutedEventArgs e)
@@ -450,9 +450,38 @@ namespace QuickRun
 
         private void Recent(object sender, RoutedEventArgs e)
         {
-            if(recenttitle.Text == "Add your first")
+            if (recenttitle.Text != "Add your first")
             {
-                
+
+                string itemnametemp = recenttitle.Text;
+
+                string[] readText = File.ReadAllLines(@"C:\test\test.txt");
+                foreach (string text in readText)
+                {
+                    string myString = text;
+                    string[] mon = myString.Split('=');   //We're making array for mon[0] is name and mon[1] is shortcut
+
+                    if (mon[0] == itemnametemp)
+                    {
+                        itemtype = mon[1];
+                        itemlink = mon[2];
+                        itemshortcut = mon[3];
+                    }
+                }
+
+                ResultPage dashboard = new ResultPage(itemnametemp, itemlink, itemtype, itemshortcut);
+                dashboard.Owner = Window.GetWindow(this);
+                dashboard.AppMainWindow = this;
+                ShowResultPanel.Content = null;
+                ShowResultPanel.Content = dashboard;
+            }
+
+            else
+            {
+                AddNewPage newpagedashboard = new AddNewPage();
+                newpagedashboard.Owner = this;
+                newpagedashboard.AppMainWindow = this;
+                AddNewPanel.Content = newpagedashboard;
             }
         }
 
