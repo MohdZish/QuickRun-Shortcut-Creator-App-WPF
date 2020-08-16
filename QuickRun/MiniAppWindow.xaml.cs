@@ -14,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
-using System.Windows.Forms;
 
 namespace QuickRun
 {
@@ -45,8 +44,7 @@ namespace QuickRun
         {
             this.WindowState = WindowState.Minimized;
             RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            reg.SetValue("QuickRun", System.Windows.Forms.Application.ExecutablePath.ToString());
-            System.Windows.Forms.MessageBox.Show("You have been successfully saved", "Message", MessageBoxButton.OK, MessageBoxIcon.Information);
+            reg.SetValue("QuickRun", System.Windows.Forms.Application.ExecutablePath);
         }
 
         private void BacktoMenu(object sender, RoutedEventArgs e)
