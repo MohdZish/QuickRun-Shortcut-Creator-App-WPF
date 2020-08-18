@@ -28,6 +28,8 @@ namespace QuickRun
         {
             InitializeComponent();
             LoadingScreen();
+            MiniAppWindow openmini = new MiniAppWindow();
+            openmini.Show();
         }
 
         

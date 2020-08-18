@@ -48,11 +48,10 @@ namespace QuickRun
         }
 
         private void BacktoMenu(object sender, RoutedEventArgs e)
-        {
+        { 
             MainWindow main = new MainWindow();
             this.Close();
             main.ShowDialog();
-            
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
