@@ -8,6 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="EditPage">
 
+    
     <Page.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">

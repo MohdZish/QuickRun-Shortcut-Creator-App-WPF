@@ -320,6 +320,7 @@ namespace QuickRun
                     }
                 }
 
+
                 else
                 {
                     if(namecondition == false && shortcutcondition == false)

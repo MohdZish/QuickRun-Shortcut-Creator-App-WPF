@@ -31,7 +31,6 @@ namespace QuickRun
             MiniAppWindow openmini = new MiniAppWindow();
             openmini.Show();
         }
-
         
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

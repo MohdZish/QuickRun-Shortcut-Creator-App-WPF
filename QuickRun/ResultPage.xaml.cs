@@ -67,6 +67,7 @@ namespace QuickRun
             myObject.itemname = name;
             buttondelete.Click += myObject.DeleteItem;
             this.Visibility = Visibility.Hidden;
+
         }
 
         private void Backbtn(object sender, RoutedEventArgs e)
